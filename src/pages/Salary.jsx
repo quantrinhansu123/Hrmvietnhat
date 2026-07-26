@@ -680,8 +680,8 @@ function Salary() {
               onClick={() => setIsGradeImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -735,8 +735,8 @@ function Salary() {
               onClick={() => setIsEmpSalaryImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -795,8 +795,8 @@ function Salary() {
               onClick={() => setIsHistoryImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',

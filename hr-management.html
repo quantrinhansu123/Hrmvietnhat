@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMI GLOBAL - Quản Lý Nhân Sự</title>
+    <title>Việt Nhật IPT - Quản Lý Nhân Sự</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-:root{--primary:#00b14f;--primary-dark:#009643;--secondary:#f37021;--accent:#1a73e8;--bg:#f5f5f5;--card:#fff;--text:#333;--text-light:#666;--border:#e0e0e0;--danger:#dc3545;--success:#28a745;--warning:#ffc107;--info:#17a2b8;--shadow:0 2px 8px rgba(0,0,0,0.1);--radius:8px}
+:root{--primary:#c8102e;--primary-dark:#9b0c24;--secondary:#1a1a1a;--accent:#b71c1c;--bg:#fafafa;--card:#fff;--text:#333;--text-light:#666;--border:#e0e0e0;--danger:#dc3545;--success:#28a745;--warning:#ffc107;--info:#17a2b8;--shadow:0 2px 8px rgba(0,0,0,0.1);--radius:8px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.header{background:linear-gradient(135deg,#4eca7a 0%,#3cb868 100%);color:#fff;padding:15px 30px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.header{background:linear-gradient(135deg,#e11d48 0%,#c8102e 100%);color:#fff;padding:15px 30px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
 .logo{display:flex;align-items:center;gap:15px}
 .logo img{height:60px;width:60px;border-radius:50%;background:#fff;padding:5px;object-fit:contain;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 .logo h1{font-size:1.5rem;font-weight:700}
-.logo span{color:var(--secondary)}
+.logo span{color:#fff}
 .user-info{display:flex;align-items:center;gap:15px}
 .user-info img{width:40px;height:40px;border-radius:50%;border:2px solid #fff}
 .container{display:flex;min-height:calc(100vh - 80px)}
 .sidebar{width:260px;background:var(--card);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:80px;height:calc(100vh - 80px);overflow-y:auto}
 .nav-item{display:flex;align-items:center;padding:12px 25px;cursor:pointer;transition:all .3s;color:var(--text);border-left:3px solid transparent}
-.nav-item:hover,.nav-item.active{background:rgba(0,177,79,0.1);color:var(--primary);border-left-color:var(--primary)}
+.nav-item:hover,.nav-item.active{background:rgba(200,16,46,0.1);color:var(--primary);border-left-color:var(--primary)}
 .nav-item i{width:25px;margin-right:12px;font-size:1.1rem}
 .main{flex:1;padding:25px;overflow-y:auto}
 .page{display:none}
@@ -49,7 +49,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--t
 table{width:100%;border-collapse:collapse}
 th,td{padding:12px 15px;text-align:left;border-bottom:1px solid var(--border)}
 th{background:var(--bg);font-weight:600;color:var(--text)}
-tr:hover{background:rgba(0,177,79,0.05)}
+tr:hover{background:rgba(200,16,46,0.05)}
 .badge{padding:4px 10px;border-radius:20px;font-size:.8rem;font-weight:500}
 .badge-success{background:#d4edda;color:#155724}
 .badge-warning{background:#fff3cd;color:#856404}
@@ -75,7 +75,7 @@ tr:hover{background:rgba(0,177,79,0.05)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .form-actions{display:flex;gap:10px;justify-content:flex-end;padding-top:15px;border-top:1px solid var(--border);margin-top:20px}
 .file-upload{border:2px dashed var(--border);border-radius:var(--radius);padding:30px;text-align:center;cursor:pointer;transition:all .3s}
-.file-upload:hover{border-color:var(--primary);background:rgba(0,177,79,0.05)}
+.file-upload:hover{border-color:var(--primary);background:rgba(200,16,46,0.05)}
 .file-upload i{font-size:2rem;color:var(--primary);margin-bottom:10px}
 .file-preview{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
 .file-item{position:relative;width:80px;height:80px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
@@ -105,12 +105,12 @@ tr:hover{background:rgba(0,177,79,0.05)}
 .dataTable{width:100%;border-collapse:collapse;font-size:13px}
 .dataTable th,.dataTable td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
 .dataTable th{background:var(--bg);font-weight:700;color:var(--text);font-size:12px;text-transform:uppercase;letter-spacing:0.5px}
-.dataTable tr:hover{background:rgba(0,177,79,0.05)}
+.dataTable tr:hover{background:rgba(200,16,46,0.05)}
 .dataTable tr.leader{background:linear-gradient(90deg,rgba(239,68,68,0.08),transparent)!important}
 .dataTable tr.leader td{color:#c62828!important;font-weight:700}
-.groupHeader{background:linear-gradient(90deg,rgba(0,177,79,0.15),transparent);padding:12px 16px;font-weight:800;font-size:14px;color:#0b3a20;margin-top:16px;margin-bottom:0;border-radius:8px 8px 0 0;border:1px solid rgba(0,177,79,0.2);border-bottom:none}
+.groupHeader{background:linear-gradient(90deg,rgba(200,16,46,0.15),transparent);padding:12px 16px;font-weight:800;font-size:14px;color:#9b0c24;margin-top:16px;margin-bottom:0;border-radius:8px 8px 0 0;border:1px solid rgba(200,16,46,0.2);border-bottom:none}
 .leaderBadge{background:linear-gradient(135deg,#ffd700,#ffaa00);color:#333;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-left:6px;display:inline-flex;align-items:center;gap:3px}
-.nameLink{color:var(--primary);font-weight:700;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(0,177,79,0.3);transition:all .2s}
+.nameLink{color:var(--primary);font-weight:700;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(200,16,46,0.3);transition:all .2s}
 .nameLink:hover{color:var(--primary-dark);text-decoration-color:var(--primary)}
 .emptyState{text-align:center;padding:40px;color:var(--text-light)}
 .loadingState{text-align:center;padding:40px;color:var(--text-light)}
@@ -157,8 +157,8 @@ dialog::backdrop{background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)}
 <body>
     <header class="header">
         <div class="logo">
-            <img src="https://www.appsheet.com/template/gettablefileurl?appName=Appsheet-325045268&tableName=Kho%20%E1%BA%A3nh&fileName=Kho%20%E1%BA%A3nh_Images%2Ff930e667.%E1%BA%A2nh.025539.jpg" alt="LUMI GLOBAL Logo">
-            <h1><span style="color:#1e88e5">LUMI</span> <span style="color:#fff">GLOBAL</span></h1>
+            <img src="https://www.appsheet.com/template/gettablefileurl?appName=Appsheet-325045268&tableName=Kho%20%E1%BA%A3nh&fileName=Kho%20%E1%BA%A3nh_Images%2Ff930e667.%E1%BA%A2nh.025539.jpg" alt="Việt Nhật IPT Logo">
+            <h1><span style="color:#fff">Việt Nhật</span> <span style="color:#fff">IPT</span></h1>
         </div>
         <div class="user-info">
             <span>Admin</span>
@@ -1554,7 +1554,7 @@ function renderNhanVienDetail(item) {
                         const displayValue = typeof value === "object" ? JSON.stringify(value) : String(value || "—");
                         const isLongField = key.includes("link") || displayValue.length > 50;
                         return `
-                            <div style="${isLongField ? "grid-column:1/-1;" : ""} padding:8px;background:rgba(0,177,79,0.05);border-radius:8px;border-left:3px solid var(--primary);">
+                            <div style="${isLongField ? "grid-column:1/-1;" : ""} padding:8px;background:rgba(200,16,46,0.05);border-radius:8px;border-left:3px solid var(--primary);">
                                 <strong style="font-size:11px;color:var(--text-light);text-transform:uppercase;">${escapeHtml(displayKey)}</strong>
                                 <div style="margin-top:4px;font-size:13px;word-break:break-word;">${escapeHtml(displayValue)}</div>
                             </div>
@@ -2614,7 +2614,7 @@ function printPayslip() {
     const content = document.getElementById('payslip-content');
     if (!content.innerHTML) { showToast('Vui lòng xem phiếu lương trước', true); return; }
     const printWindow = window.open('', '_blank');
-    printWindow.document.write('<html><head><title>Phiếu lương</title><style>body{font-family:Arial,sans-serif;padding:20px}.payslip-container{max-width:800px;margin:0 auto;border:2px solid #333}.payslip-header{background:#00b14f;color:#fff;padding:25px;text-align:center}.payslip-header h2{margin:0}.payslip-body{padding:25px}.payslip-section{margin-bottom:25px}.payslip-section h4{border-bottom:2px solid #00b14f;padding-bottom:8px;margin-bottom:15px}.payslip-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}.payslip-row.highlight{background:#f0f0f0;padding:10px;margin:0 -25px;padding-left:25px;padding-right:25px}.payslip-row.total{background:#d4edda;margin:10px -25px 0;padding:15px 25px;font-size:1.2rem}</style></head><body>');
+    printWindow.document.write('<html><head><title>Phiếu lương</title><style>body{font-family:Arial,sans-serif;padding:20px}.payslip-container{max-width:800px;margin:0 auto;border:2px solid #333}.payslip-header{background:#c8102e;color:#fff;padding:25px;text-align:center}.payslip-header h2{margin:0}.payslip-body{padding:25px}.payslip-section{margin-bottom:25px}.payslip-section h4{border-bottom:2px solid #c8102e;padding-bottom:8px;margin-bottom:15px}.payslip-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}.payslip-row.highlight{background:#f0f0f0;padding:10px;margin:0 -25px;padding-left:25px;padding-right:25px}.payslip-row.total{background:#d4edda;margin:10px -25px 0;padding:15px 25px;font-size:1.2rem}</style></head><body>');
     printWindow.document.write(content.innerHTML);
     printWindow.document.write('</body></html>');
     printWindow.document.close();

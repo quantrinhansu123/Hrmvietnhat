@@ -130,7 +130,7 @@
   align-items: center;
   gap: 12px;
   padding: 16px 18px;
-  background: linear-gradient(135deg, #15803d 0%, #14532d 100%);
+  background: linear-gradient(135deg, #c8102e 0%, #9b0c24 100%);
   color: #fff;
   flex: 0 0 auto;
 }
@@ -228,7 +228,7 @@
 }
 
 .apv-tabs button.active {
-  color: #16a34a;
+  color: #dc2626;
 }
 
 .apv-tabs button.active::after {
@@ -238,7 +238,7 @@
   right: 0;
   bottom: -1px;
   height: 2px;
-  background: #16a34a;
+  background: #dc2626;
   border-radius: 2px;
 }
 
@@ -276,8 +276,8 @@
 }
 
 .apv-chip--done.active {
-  background: #e9f9ee;
-  color: #16a34a;
+  background: #fef2f2;
+  color: #dc2626;
   border-color: #b9ecc7;
 }
 
@@ -343,7 +343,7 @@
 }
 
 .apv-card__title i {
-  color: #16a34a;
+  color: #dc2626;
   flex: 0 0 auto;
 }
 
@@ -362,8 +362,8 @@
   white-space: nowrap;
 }
 
-.apv-badge--pending { background: #e8f1ff; color: #1a73e8; }
-.apv-badge--approved { background: #e9f9ee; color: #16a34a; }
+.apv-badge--pending { background: #fef2f2; color: #c8102e; }
+.apv-badge--approved { background: #fef2f2; color: #dc2626; }
 .apv-badge--rejected { background: #fdecec; color: #dc3545; }
 
 .apv-card__row {
@@ -402,7 +402,7 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #16a34a;
+  background: #dc2626;
   color: #fff;
   display: flex;
   align-items: center;
@@ -438,7 +438,7 @@
 
 .apv-card__row--decision span {
   -webkit-line-clamp: 2;
-  color: #067647;
+  color: #9b0c24;
   font-weight: 600;
 }
 
@@ -463,7 +463,7 @@
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: #16a34a;
+  background: #dc2626;
   color: #fff;
   border: none;
   font-size: 1.4rem;
@@ -513,8 +513,8 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #e9f9ee;
-  color: #16a34a;
+  background: #fef2f2;
+  color: #dc2626;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -599,7 +599,7 @@
 .apv-field textarea:focus,
 .apv-field .apv-select:focus {
   outline: none;
-  border-color: #16a34a;
+  border-color: #dc2626;
   background: #fff;
   box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
 }
@@ -617,7 +617,7 @@
   gap: 6px;
   background: none;
   border: none;
-  color: #16a34a;
+  color: #dc2626;
   font-weight: 700;
   font-size: 0.85rem;
   cursor: pointer;
@@ -697,9 +697,9 @@
 }
 
 .apv-tl-step__dot--muted { background: #cbd3da; }
-.apv-tl-step__dot--submit { background: #16a34a; }
-.apv-tl-step__dot--pending { background: #1a73e8; }
-.apv-tl-step__dot--approved { background: #16a34a; }
+.apv-tl-step__dot--submit { background: #dc2626; }
+.apv-tl-step__dot--pending { background: #c8102e; }
+.apv-tl-step__dot--approved { background: #dc2626; }
 .apv-tl-step__dot--rejected { background: #dc3545; }
 .apv-tl-step__dot--waiting { background: #e3e6ea; color: #8a929b; }
 
@@ -732,9 +732,9 @@
   margin-left: 8px;
 }
 
-.apv-tl-step__status--approved { color: #16a34a; }
+.apv-tl-step__status--approved { color: #dc2626; }
 .apv-tl-step__status--rejected { color: #dc3545; }
-.apv-tl-step__status--pending { color: #1a73e8; }
+.apv-tl-step__status--pending { color: #c8102e; }
 .apv-tl-step__status--waiting { color: #98a2b3; }
 
 .apv-tl-approver {
@@ -765,7 +765,7 @@
 }
 
 .apv-tl-approver__meta--decision {
-  color: #067647;
+  color: #9b0c24;
   white-space: normal;
 }
 
@@ -787,7 +787,7 @@
   background: #fff;
 }
 
-.apv-tl-add-approver:hover { border-color: #16a34a; color: #16a34a; }
+.apv-tl-add-approver:hover { border-color: #dc2626; color: #dc2626; }
 
 .apv-tl-remove-approver {
   background: none;
@@ -806,7 +806,7 @@
   gap: 6px;
   background: none;
   border: none;
-  color: #16a34a;
+  color: #dc2626;
   font-weight: 700;
   font-size: 0.85rem;
   cursor: pointer;
@@ -957,11 +957,11 @@
   gap: 8px;
 }
 
-.apv-btn--primary { background: #15803d; color: #fff; }
-.apv-btn--primary:hover { background: #14532d; }
+.apv-btn--primary { background: #c8102e; color: #fff; }
+.apv-btn--primary:hover { background: #9b0c24; }
 .apv-btn--primary:disabled { background: #b7c2c8; cursor: not-allowed; }
 
-.apv-btn--approve { background: #16a34a; color: #fff; }
+.apv-btn--approve { background: #dc2626; color: #fff; }
 .apv-btn--approve:hover { background: #128a3e; }
 
 .apv-btn--reject { background: #fff; color: #dc3545; border: 1px solid #f3c6cb; }
@@ -1169,7 +1169,7 @@
 }
 
 .apv-stats__period.active {
-  background: #16a34a;
+  background: #dc2626;
   color: #fff;
 }
 
@@ -1228,7 +1228,7 @@
 }
 
 .apv-stats__card--pending strong { color: #d9720b; }
-.apv-stats__card--approved strong { color: #16a34a; }
+.apv-stats__card--approved strong { color: #dc2626; }
 .apv-stats__card--rejected strong { color: #dc2626; }
 
 .apv-stats__table-wrap {
@@ -1280,8 +1280,8 @@
   align-items: center;
   gap: 6px;
   border: 1px solid #b9ecc7;
-  background: #e9f9ee;
-  color: #15803d;
+  background: #fef2f2;
+  color: #c8102e;
   border-radius: 8px;
   padding: 6px 12px;
   font-size: 0.8rem;
@@ -1291,8 +1291,8 @@
 }
 
 .apv-stats__detail-btn:hover {
-  background: #16a34a;
-  border-color: #16a34a;
+  background: #dc2626;
+  border-color: #dc2626;
   color: #fff;
 }
 
@@ -1442,7 +1442,7 @@
 
 .apv-my-stats__period-top strong {
   font-size: 1.15rem;
-  color: #16a34a;
+  color: #dc2626;
 }
 
 .apv-my-stats__current {
@@ -1474,9 +1474,9 @@
 }
 
 .apv-my-stats__types span.is-active {
-  background: #e9f9ee;
+  background: #fef2f2;
   border-color: #b9ecc7;
-  color: #067647;
+  color: #9b0c24;
   font-weight: 600;
 }
 

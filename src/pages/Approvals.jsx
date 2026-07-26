@@ -21,7 +21,7 @@ const REQUEST_TEMPLATES = [
     title: 'Đề xuất in ấn, ấn phẩm',
     description: 'Đề xuất nhu cầu in ấn hoặc sản xuất ấn phẩm.',
     icon: 'fa-file-circle-check',
-    color: '#16a34a'
+    color: '#c8102e'
   },
   {
     id: 'recruit',
@@ -29,7 +29,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT TUYỂN DỤNG NHÂN SỰ',
     description: 'Đề xuất nhu cầu tuyển dụng nhân sự mới.',
     icon: 'fa-file-circle-check',
-    color: '#84cc16'
+    color: '#e11d48'
   },
   {
     id: 'transfer',
@@ -37,7 +37,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT ĐIỀU CHUYỂN NHÂN SỰ',
     description: 'Đề xuất điều chuyển vị trí hoặc bộ phận nhân sự.',
     icon: 'fa-file-circle-check',
-    color: '#06b6d4'
+    color: '#9b0c24'
   },
   {
     id: 'appoint',
@@ -45,7 +45,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT BỔ NHIỆM NHÂN SỰ',
     description: 'Đề xuất bổ nhiệm chức danh hoặc vị trí quản lý.',
     icon: 'fa-file-circle-check',
-    color: '#3b82f6'
+    color: '#b71c1c'
   },
   {
     id: 'salary-adjust',
@@ -53,7 +53,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT ĐIỀU CHỈNH MỨC LƯƠNG',
     description: 'Đề xuất điều chỉnh mức lương theo năng lực hoặc thâm niên.',
     icon: 'fa-file-circle-check',
-    color: '#22c55e'
+    color: '#dc2626'
   },
   {
     id: 'contract-type',
@@ -61,7 +61,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT LOẠI HỢP ĐỒNG KÝ',
     description: 'Đề xuất loại hợp đồng lao động cần ký với nhân sự.',
     icon: 'fa-file-circle-check',
-    color: '#16a34a'
+    color: '#c8102e'
   },
   {
     id: 'plan-travel',
@@ -69,7 +69,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT KẾ HOẠCH & CÔNG TÁC PHÍ',
     description: 'Trình kế hoạch công tác và đề xuất công tác phí liên quan.',
     icon: 'fa-file-circle-check',
-    color: '#22c55e'
+    color: '#e11d48'
   },
   {
     id: 'discipline',
@@ -77,7 +77,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT XỬ LÝ VI PHẠM KỶ LUẬT',
     description: 'Đề xuất hình thức xử lý vi phạm kỷ luật lao động.',
     icon: 'fa-file-circle-check',
-    color: '#16a34a'
+    color: '#9b0c24'
   },
   {
     id: 'late-early',
@@ -85,7 +85,7 @@ const REQUEST_TEMPLATES = [
     title: 'Đi muộn/về sớm',
     description: 'Xin phép đi muộn hoặc về sớm trong ngày làm việc.',
     icon: 'fa-file-lines',
-    color: '#8b5cf6'
+    color: '#b71c1c'
   },
   {
     id: 'leave',
@@ -93,7 +93,7 @@ const REQUEST_TEMPLATES = [
     title: 'Đơn xin nghỉ phép',
     description: 'Gửi đơn xin nghỉ phép theo quy định của công ty.',
     icon: 'fa-file-circle-check',
-    color: '#22c55e'
+    color: '#dc2626'
   },
   {
     id: 'proposal',
@@ -101,7 +101,7 @@ const REQUEST_TEMPLATES = [
     title: 'ĐỀ XUẤT',
     description: 'Sử dụng khi cần trình đề xuất, xin ý kiến hoặc phê duyệt nội dung công việc.',
     icon: 'fa-file-signature',
-    color: '#16a34a'
+    color: '#c8102e'
   }
 ]
 
@@ -871,7 +871,7 @@ function Approvals() {
             <div className="apv-body">
               <div className="apv-card-block">
                 <div className="apv-template-info">
-                  <div className="apv-template-info__icon" style={{ background: selectedTemplate?.color || '#16a34a' }}>
+                  <div className="apv-template-info__icon" style={{ background: selectedTemplate?.color || '#c8102e' }}>
                     <i className={`fas ${selectedTemplate?.icon || 'fa-file-signature'}`}></i>
                   </div>
                   <div>

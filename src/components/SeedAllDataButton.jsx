@@ -17,11 +17,11 @@ function SeedAllDataButton({ onComplete }) {
       const employees = await fbGet('employees')
       if (!employees || Object.keys(employees).length === 0) {
         const sampleEmployees = [
-          { ho_va_ten: 'Đỗ Mạnh Cường', email: 'cuong@lumi.com', sđt: '0123456789', chi_nhanh: 'HCM', bo_phan: 'MKT', vi_tri: 'MKT 3', trang_thai: 'Chính thức', ngay_vao_lam: '2024-01-01' },
-          { ho_va_ten: 'Nguyễn Thị Hiếu', email: 'hieu@lumi.com', sđt: '0123456790', chi_nhanh: 'HCM', bo_phan: 'MKT', vi_tri: 'MKT 4', trang_thai: 'Chính thức', ngay_vao_lam: '2024-02-01' },
-          { ho_va_ten: 'Trần Quốc Khải', email: 'khai@lumi.com', sđt: '0123456791', chi_nhanh: 'Hà Nội', bo_phan: 'Sale', vi_tri: 'Sale 2', trang_thai: 'Chính thức', ngay_vao_lam: '2024-03-01' },
-          { ho_va_ten: 'Lê Thị Mai', email: 'mai@lumi.com', sđt: '0123456792', chi_nhanh: 'HCM', bo_phan: 'CSKH', vi_tri: 'NV CSKH', trang_thai: 'Chính thức', ngay_vao_lam: '2024-04-01' },
-          { ho_va_ten: 'Phạm Văn Đức', email: 'duc@lumi.com', sđt: '0123456793', chi_nhanh: 'Hà Nội', bo_phan: 'Vận đơn', vi_tri: 'NV Vận đơn', trang_thai: 'Chính thức', ngay_vao_lam: '2024-05-01' }
+          { ho_va_ten: 'Đỗ Mạnh Cường', email: 'cuong@vietnhatipt.vn', sđt: '0123456789', chi_nhanh: 'HCM', bo_phan: 'MKT', vi_tri: 'MKT 3', trang_thai: 'Chính thức', ngay_vao_lam: '2024-01-01' },
+          { ho_va_ten: 'Nguyễn Thị Hiếu', email: 'hieu@vietnhatipt.vn', sđt: '0123456790', chi_nhanh: 'HCM', bo_phan: 'MKT', vi_tri: 'MKT 4', trang_thai: 'Chính thức', ngay_vao_lam: '2024-02-01' },
+          { ho_va_ten: 'Trần Quốc Khải', email: 'khai@vietnhatipt.vn', sđt: '0123456791', chi_nhanh: 'Hà Nội', bo_phan: 'Sale', vi_tri: 'Sale 2', trang_thai: 'Chính thức', ngay_vao_lam: '2024-03-01' },
+          { ho_va_ten: 'Lê Thị Mai', email: 'mai@vietnhatipt.vn', sđt: '0123456792', chi_nhanh: 'HCM', bo_phan: 'CSKH', vi_tri: 'NV CSKH', trang_thai: 'Chính thức', ngay_vao_lam: '2024-04-01' },
+          { ho_va_ten: 'Phạm Văn Đức', email: 'duc@vietnhatipt.vn', sđt: '0123456793', chi_nhanh: 'Hà Nội', bo_phan: 'Vận đơn', vi_tri: 'NV Vận đơn', trang_thai: 'Chính thức', ngay_vao_lam: '2024-05-01' }
         ]
         for (const emp of sampleEmployees) {
           await fbPush('employees', emp)

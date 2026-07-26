@@ -1,4 +1,4 @@
-# LUMI GLOBAL - Quản Lý Nhân Sự (React)
+# Việt Nhật IPT - Quản Lý Nhân Sự (React)
 
 Ứng dụng quản lý nhân sự được xây dựng với React và Vite.
 

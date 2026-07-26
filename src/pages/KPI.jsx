@@ -668,8 +668,8 @@ function KPI() {
               onClick={() => setIsResultImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -740,8 +740,8 @@ function KPI() {
                   className="btn"
                   onClick={() => setIsTemplateImportModalOpen(true)}
                   style={{
-                    background: '#6f42c1',
-                    borderColor: '#6f42c1',
+                    background: '#c8102e',
+                    borderColor: '#c8102e',
                     color: '#fff',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -871,8 +871,8 @@ function KPI() {
                   onClick={() => setIsEmployeeKPIImportModalOpen(true)}
                   style={{
                     marginTop: '-20px',
-                    background: '#6f42c1',
-                    borderColor: '#6f42c1',
+                    background: '#c8102e',
+                    borderColor: '#c8102e',
                     color: '#fff',
                     display: 'inline-flex',
                     alignItems: 'center',

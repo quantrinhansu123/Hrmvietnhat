@@ -926,8 +926,8 @@ function Competency() {
               onClick={() => setIsFrameworkImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -971,8 +971,8 @@ function Competency() {
               onClick={() => setIsEvalImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -1026,8 +1026,8 @@ function Competency() {
               onClick={() => setIsTrainingImportModalOpen(true)}
               style={{
                 marginLeft: '10px',
-                background: '#6f42c1',
-                borderColor: '#6f42c1',
+                background: '#c8102e',
+                borderColor: '#c8102e',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',

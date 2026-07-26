@@ -1,7 +1,7 @@
 {
   "name": "hr-management",
   "version": "1.0.0",
-  "description": "LUMI GLOBAL - Quản Lý Nhân Sự",
+  "description": "Việt Nhật IPT - Quản Lý Nhân Sự",
   "private": true,
   "scripts": {
     "dev": "vite",

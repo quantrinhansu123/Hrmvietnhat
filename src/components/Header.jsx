@@ -1,4 +1,3 @@
-
 function Header() {
   return (
     <header className="header">
@@ -11,13 +10,14 @@ function Header() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '1.5rem',
+          fontSize: '1.1rem',
           fontWeight: 'bold',
-          color: '#00b14f'
+          color: '#c8102e',
+          letterSpacing: '-0.5px'
         }}>
-          L
+          VN
         </div>
-        <h1>LUMI <span>GLOBAL</span> Admin</h1>
+        <h1>Việt Nhật <span>IPT</span> Admin</h1>
       </div>
       <div className="user-info">
         <span>Admin</span>
@@ -29,7 +29,7 @@ function Header() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#00b14f',
+          color: '#c8102e',
           fontWeight: 'bold'
         }}>
           A
