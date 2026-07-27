@@ -1,0 +1,260 @@
+.dashboard-menu {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 18px 0 28px;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(225, 29, 72, 0.08), transparent 34%),
+    linear-gradient(180deg, #fff 0%, #fff7f8 100%);
+  border-radius: 18px;
+}
+
+.dashboard-menu__heading {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+}
+
+.dashboard-menu__heading p {
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  margin-bottom: 7px;
+}
+
+.dashboard-menu__heading h1 {
+  color: #242424;
+  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+}
+
+.orbit-stage {
+  --orbit-size: min(65vh, 680px);
+  --orbit-radius: calc(var(--orbit-size) * 0.4);
+  position: relative;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  flex: 0 0 var(--orbit-size);
+  margin: -4px auto -8px;
+}
+
+.orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px dashed rgba(200, 16, 46, 0.24);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.orbit-ring--outer {
+  width: 80%;
+  height: 80%;
+  box-shadow: 0 0 45px rgba(200, 16, 46, 0.08);
+}
+
+.orbit-ring--inner {
+  width: 47%;
+  height: 47%;
+  border-style: solid;
+  border-color: rgba(200, 16, 46, 0.1);
+}
+
+.orbit-center {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: 34%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 5%;
+  background: #fff;
+  border: 1px solid rgba(200, 16, 46, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 15px 45px rgba(108, 11, 31, 0.16);
+  transform: translate(-50%, -50%);
+}
+
+.orbit-center__halo {
+  position: absolute;
+  inset: -10px;
+  border: 2px solid rgba(225, 29, 72, 0.15);
+  border-radius: inherit;
+  animation: logoPulse 2.8s ease-in-out infinite;
+}
+
+.orbit-center img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.orbit-menu {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  animation: orbitSpin 30s linear infinite;
+  will-change: transform;
+}
+
+.orbit-stage:has(.orbit-link:hover) .orbit-menu,
+.orbit-stage:has(.orbit-link:hover) .orbit-counter,
+.orbit-stage:has(.orbit-link:focus-visible) .orbit-menu,
+.orbit-stage:has(.orbit-link:focus-visible) .orbit-counter {
+  animation-play-state: paused;
+}
+
+.orbit-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  transform: rotate(var(--angle)) translateX(var(--orbit-radius));
+}
+
+.orbit-counter {
+  animation: orbitCounterSpin 30s linear infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.orbit-link {
+  position: absolute;
+  left: -52px;
+  top: -52px;
+  width: 104px;
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 6px;
+  color: #303030;
+  text-align: center;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(25, 25, 25, 0.08);
+  border-radius: 22px;
+  box-shadow: 0 8px 24px rgba(40, 20, 25, 0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.orbit-link:hover,
+.orbit-link:focus-visible {
+  z-index: 10;
+  transform: scale(1.1);
+  border-color: var(--item-color);
+  box-shadow: 0 14px 32px rgba(40, 20, 25, 0.2);
+  outline: none;
+}
+
+.orbit-link__icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 1.15rem;
+  background: var(--item-color);
+  border-radius: 14px;
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--item-color) 30%, transparent);
+}
+
+.orbit-link__label {
+  max-width: 94px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.dashboard-menu__hint {
+  color: #777;
+  font-size: 0.82rem;
+}
+
+.dashboard-menu__hint i {
+  color: var(--primary);
+  margin-right: 7px;
+}
+
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitCounterSpin {
+  from { transform: rotate(var(--counter-angle)); }
+  to { transform: rotate(calc(var(--counter-angle) - 360deg)); }
+}
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(0.96); opacity: 0.45; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .dashboard-menu {
+    min-height: calc(100vh - 120px);
+  }
+
+  .orbit-stage {
+    --orbit-size: min(76vw, 590px);
+  }
+
+  .orbit-link {
+    left: -46px;
+    top: -46px;
+    width: 92px;
+    min-height: 92px;
+    border-radius: 18px;
+  }
+
+  .orbit-link__icon {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 620px) {
+  .dashboard-menu {
+    min-height: auto;
+    padding: 28px 12px;
+    overflow: visible;
+  }
+
+  .orbit-stage {
+    --orbit-size: min(92vw, 430px);
+    --orbit-radius: calc(var(--orbit-size) * 0.38);
+    margin-top: 20px;
+  }
+
+  .orbit-link {
+    left: -36px;
+    top: -36px;
+    width: 72px;
+    min-height: 72px;
+    gap: 4px;
+    padding: 6px 3px;
+    border-radius: 15px;
+  }
+
+  .orbit-link__icon {
+    width: 31px;
+    height: 31px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+
+  .orbit-link__label {
+    font-size: 0.61rem;
+  }
+}

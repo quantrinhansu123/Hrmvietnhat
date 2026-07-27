@@ -62,20 +62,17 @@ function Login() {
                 padding: '60px'
             }}>
                 <div style={{ marginBottom: '40px' }}>
-                    <div style={{
-                        width: '60px',
-                        height: '60px',
-                        background: 'var(--primary)',
-                        borderRadius: '12px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: '20px',
-                        color: '#fff',
-                        fontSize: '1.8rem'
-                    }}>
-                        <i className="fas fa-plane-departure"></i>
-                    </div>
+                    <img
+                        src="/logo.png"
+                        alt="Việt Nhật IPT"
+                        style={{
+                            width: '220px',
+                            maxWidth: '100%',
+                            height: 'auto',
+                            display: 'block',
+                            marginBottom: '24px'
+                        }}
+                    />
                     <h2 style={{ color: 'var(--primary)', fontSize: '2rem', marginBottom: '10px', fontWeight: '800' }}>WELCOME BACK</h2>
                     <p className="text-muted" style={{ fontSize: '1.1rem' }}>Đăng nhập hệ thống quản lý nhân sự</p>
                 </div>

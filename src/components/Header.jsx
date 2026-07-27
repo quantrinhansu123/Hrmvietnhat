@@ -2,21 +2,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <div style={{
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          background: '#fff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '1.1rem',
-          fontWeight: 'bold',
-          color: '#c8102e',
-          letterSpacing: '-0.5px'
-        }}>
-          VN
-        </div>
+        <img src="/logo.png" alt="Việt Nhật IPT" />
         <h1>Việt Nhật <span>IPT</span> Admin</h1>
       </div>
       <div className="user-info">

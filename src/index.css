@@ -23,7 +23,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -51,10 +51,10 @@ body {
 
 .logo img {
   height: 60px;
-  width: 60px;
-  border-radius: 50%;
+  width: 150px;
+  border-radius: 8px;
   background: #fff;
-  padding: 5px;
+  padding: 4px 8px;
   object-fit: contain;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }

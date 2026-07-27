@@ -1,196 +1,75 @@
-import { useEffect, useState } from 'react'
-import SeedAllDataButton from '../components/SeedAllDataButton'
-import { fbGet } from '../services/firebase'
+import { Link } from 'react-router-dom'
+import './Dashboard.css'
+
+const menuItems = [
+  { path: '/employees', icon: 'fas fa-users', label: 'Hồ sơ nhân sự', color: '#e11d48' },
+  { path: '/recruitment', icon: 'fas fa-user-plus', label: 'Tuyển dụng', color: '#f97316' },
+  { path: '/salary', icon: 'fas fa-money-bill-wave', label: 'Lương & Phúc lợi', color: '#16a34a' },
+  { path: '/competency', icon: 'fas fa-chart-line', label: 'Khung năng lực', color: '#0891b2' },
+  { path: '/kpi', icon: 'fas fa-bullseye', label: 'KPI', color: '#7c3aed' },
+  { path: '/tasks', icon: 'fas fa-tasks', label: 'Công việc', color: '#2563eb' },
+  { path: '/approvals', icon: 'fas fa-stamp', label: 'Đề xuất', color: '#db2777' },
+  { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công', color: '#0f766e' },
+  { path: '/honor', icon: 'fas fa-medal', label: 'Vinh danh', color: '#ca8a04' }
+]
 
 function Dashboard() {
-  const [stats, setStats] = useState({
-    totalEmployees: 0,
-    hcmCount: 0,
-    hanoiCount: 0,
-    activeTasks: 0
-  })
-  const [recentEmployees, setRecentEmployees] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = async () => {
-    try {
-      const empData = await fbGet('employees')
-      let employees = []
-
-      if (empData === null || empData === undefined) {
-        employees = []
-      } else if (Array.isArray(empData)) {
-        employees = empData.filter(item => item !== null && item !== undefined)
-      } else if (typeof empData === "object") {
-        employees = Object.entries(empData)
-          .filter(([k, v]) => v !== null && v !== undefined)
-          .map(([k, v]) => ({ ...v, id: k }))
-      }
-
-      const hcmCount = employees.filter(e => {
-        const branch = e.chi_nhanh || e.branch || ''
-        return branch === 'HCM' || branch === 'Hồ Chí Minh' || branch === 'TP. Hồ Chí Minh'
-      }).length
-
-      const hanoiCount = employees.filter(e => {
-        const branch = e.chi_nhanh || e.branch || ''
-        return branch === 'Hà Nội' || branch === 'Hanoi' || branch === 'HN'
-      }).length
-
-      // Load tasks
-      let tasks = []
-      try {
-        const tasksData = await fbGet('hr/tasks')
-        tasks = tasksData ? Object.entries(tasksData).map(([k, v]) => ({ ...v, id: k })) : []
-      } catch (e) {
-        console.warn('Tasks not found')
-      }
-
-      const activeTasks = tasks.filter(t => t.status === 'Đang làm').length
-
-      setStats({
-        totalEmployees: employees.length,
-        hcmCount,
-        hanoiCount,
-        activeTasks
-      })
-
-      setRecentEmployees(employees.slice(-5).reverse())
-      setLoading(false)
-    } catch (e) {
-      console.error('Error loading dashboard:', e)
-      setLoading(false)
-    }
-  }
-
-  if (loading) {
-    return <div className="loadingState">Đang tải dữ liệu...</div>
-  }
+  const step = 360 / menuItems.length
 
   return (
-    <div>
-      <div className="page-header">
-        <h1 className="page-title">
-          <i className="fas fa-home"></i>
-          Tổng quan hệ thống
-        </h1>
-        <SeedAllDataButton onComplete={loadData} />
+    <section className="dashboard-menu">
+      <div className="dashboard-menu__heading">
+        <p>HỆ THỐNG QUẢN TRỊ NHÂN SỰ</p>
+        <h1>Chọn chức năng để bắt đầu</h1>
       </div>
 
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-icon green">
-            <i className="fas fa-users"></i>
-          </div>
-          <div className="stat-info">
-            <h3 id="total-employees">{stats.totalEmployees}</h3>
-            <p>Tổng nhân viên</p>
-          </div>
+      <div className="orbit-stage" aria-label="Menu chức năng">
+        <div className="orbit-ring orbit-ring--outer" aria-hidden="true"></div>
+        <div className="orbit-ring orbit-ring--inner" aria-hidden="true"></div>
+
+        <div className="orbit-center">
+          <span className="orbit-center__halo" aria-hidden="true"></span>
+          <img src="/logo.png" alt="Việt Nhật IPT" />
         </div>
 
-        <div className="stat-card">
-          <div className="stat-icon orange">
-            <span>🏙️</span>
-          </div>
-          <div className="stat-info">
-            <h3 id="total-sg">{stats.hcmCount}</h3>
-            <p>Chi nhánh HCM</p>
-          </div>
-        </div>
+        <div className="orbit-menu">
+          {menuItems.map((item, index) => {
+            const angle = step * index
 
-        <div className="stat-card">
-          <div className="stat-icon blue">
-            <span>🏛️</span>
-          </div>
-          <div className="stat-info">
-            <h3 id="total-hn">{stats.hanoiCount}</h3>
-            <p>Chi nhánh Hà Nội</p>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon red">
-            <i className="fas fa-tasks"></i>
-          </div>
-          <div className="stat-info">
-            <h3 id="total-tasks">{stats.activeTasks}</h3>
-            <p>Task đang làm</p>
-          </div>
+            return (
+              <div
+                className="orbit-node"
+                key={item.path}
+                style={{
+                  '--angle': `${angle}deg`,
+                  '--counter-angle': `${-angle}deg`
+                }}
+              >
+                <div className="orbit-counter">
+                  <Link
+                    className="orbit-link"
+                    to={item.path}
+                    style={{ '--item-color': item.color }}
+                    aria-label={item.label}
+                  >
+                    <span className="orbit-link__icon">
+                      <i className={item.icon}></i>
+                    </span>
+                    <span className="orbit-link__label">{item.label}</span>
+                  </Link>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
 
-      <div className="card">
-        <div className="card-header">
-          <h3 className="card-title">Nhân viên mới nhất</h3>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Ảnh</th>
-              <th>Họ và tên</th>
-              <th>Vị trí</th>
-              <th>Chi nhánh</th>
-              <th>Trạng thái</th>
-            </tr>
-          </thead>
-          <tbody id="recent-employees">
-            {recentEmployees.length > 0 ? (
-              recentEmployees.map((e, idx) => {
-                const name = e.ho_va_ten || e.name || e.Tên || 'N/A'
-                const position = e.vi_tri || e.position || '-'
-                const branch = e.chi_nhanh || e.branch || '-'
-                const avatar = e.avatarDataUrl || e.avatarUrl || e.avatar || ''
-                return (
-                  <tr key={idx}>
-                    <td>
-                      {avatar ? (
-                        <img
-                          src={avatar}
-                          alt={name}
-                          style={{
-                            width: '40px',
-                            height: '40px',
-                            borderRadius: '50%',
-                            objectFit: 'cover'
-                          }}
-                          onError={(e) => e.target.style.display = 'none'}
-                        />
-                      ) : (
-                        <span style={{
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          background: 'var(--primary)',
-                          display: 'inline-block'
-                        }}></span>
-                      )}
-                    </td>
-                    <td>{name}</td>
-                    <td>{position}</td>
-                    <td>
-                      <span className={`badge ${branch === 'Hà Nội' ? 'badge-hn' : 'badge-sg'}`}>
-                        {branch}
-                      </span>
-                    </td>
-                    <td>-</td>
-                  </tr>
-                )
-              })
-            ) : (
-              <tr>
-                <td colSpan="5" className="empty-state">Chưa có dữ liệu</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+      <p className="dashboard-menu__hint">
+        <i className="fas fa-mouse-pointer"></i>
+        Di chuột vào biểu tượng để dừng vòng quay
+      </p>
+    </section>
   )
 }
 
 export default Dashboard
-
