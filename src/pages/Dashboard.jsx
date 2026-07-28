@@ -9,8 +9,7 @@ const menuItems = [
   { path: '/kpi', icon: 'fas fa-bullseye', label: 'KPI', color: '#7c3aed' },
   { path: '/tasks', icon: 'fas fa-tasks', label: 'Công việc', color: '#2563eb' },
   { path: '/approvals', icon: 'fas fa-stamp', label: 'Đề xuất', color: '#db2777' },
-  { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công', color: '#0f766e' },
-  { path: '/honor', icon: 'fas fa-medal', label: 'Vinh danh', color: '#ca8a04' }
+  { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công', color: '#0f766e' }
 ]
 
 function Dashboard() {

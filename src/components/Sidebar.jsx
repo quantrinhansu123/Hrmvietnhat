@@ -12,8 +12,7 @@ function Sidebar() {
     { path: '/kpi', icon: 'fas fa-bullseye', label: 'KPI' },
     { path: '/tasks', icon: 'fas fa-tasks', label: 'Công việc' },
     { path: '/approvals', icon: 'fas fa-stamp', label: 'Đề xuất' },
-    { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công' },
-    { path: '/honor', icon: 'fas fa-medal', label: 'Vinh danh' }
+    { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công' }
   ]
 
   return (
