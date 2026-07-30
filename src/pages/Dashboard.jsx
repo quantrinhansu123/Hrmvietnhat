@@ -64,8 +64,8 @@ function Dashboard() {
       </div>
 
       <p className="dashboard-menu__hint">
-        <i className="fas fa-mouse-pointer"></i>
-        Di chuột vào biểu tượng để dừng vòng quay
+        <i className="fas fa-hand-pointer"></i>
+        Chọn một biểu tượng để mở chức năng
       </p>
     </section>
   )

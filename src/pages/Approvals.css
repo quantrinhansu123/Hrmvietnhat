@@ -278,7 +278,7 @@
 .apv-chip--done.active {
   background: #fef2f2;
   color: #dc2626;
-  border-color: #b9ecc7;
+  border-color: #f3c6cb;
 }
 
 /* ---------- List ---------- */
@@ -467,7 +467,7 @@
   color: #fff;
   border: none;
   font-size: 1.4rem;
-  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+  box-shadow: 0 8px 20px rgba(200, 16, 46, 0.32);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -475,7 +475,7 @@
   z-index: 5;
 }
 
-.apv-fab:hover { background: #128a3e; }
+.apv-fab:hover { background: #9b0c24; }
 
 /* ---------- Body (create / detail scroll area) ---------- */
 .apv-body {
@@ -601,7 +601,7 @@
   outline: none;
   border-color: #dc2626;
   background: #fff;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+  box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.12);
 }
 
 .apv-field-error {
@@ -710,7 +710,7 @@
   min-height: 18px;
 }
 
-.apv-tl-step__line--done { background: #a9e2bb; }
+.apv-tl-step__line--done { background: #f3c6cb; }
 
 .apv-tl-step__body {
   flex: 1;
@@ -962,7 +962,7 @@
 .apv-btn--primary:disabled { background: #b7c2c8; cursor: not-allowed; }
 
 .apv-btn--approve { background: #dc2626; color: #fff; }
-.apv-btn--approve:hover { background: #128a3e; }
+.apv-btn--approve:hover { background: #9b0c24; }
 
 .apv-btn--reject { background: #fff; color: #dc3545; border: 1px solid #f3c6cb; }
 .apv-btn--reject:hover { background: #fdecec; }
@@ -1279,7 +1279,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border: 1px solid #b9ecc7;
+  border: 1px solid #f3c6cb;
   background: #fef2f2;
   color: #c8102e;
   border-radius: 8px;
@@ -1475,7 +1475,7 @@
 
 .apv-my-stats__types span.is-active {
   background: #fef2f2;
-  border-color: #b9ecc7;
+  border-color: #f3c6cb;
   color: #9b0c24;
   font-weight: 600;
 }

@@ -385,7 +385,7 @@ function CandidateModal({ candidate, isOpen, onClose, onSave, readOnly = false, 
                             link.click()
                           }}
                           style={{
-                            background: '#4caf50',
+                            background: 'var(--primary)',
                             color: '#fff',
                             border: 'none',
                             borderRadius: '4px',

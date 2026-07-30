@@ -656,8 +656,8 @@ function Salary() {
               onClick={exportGradesToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -711,8 +711,8 @@ function Salary() {
               onClick={exportEmpSalariesToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -771,8 +771,8 @@ function Salary() {
               onClick={exportHistoryToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',

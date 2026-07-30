@@ -1,19 +1,23 @@
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../services/supabase'
 
 function Login() {
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('admin@company.local')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    const { login } = useAuth()
+    const { user, login } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
-    const from = location.state?.from?.pathname || '/'
+    const from = location.state?.from?.pathname || '/dashboard'
+
+    if (user) {
+        return <Navigate to="/dashboard" replace />
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -45,14 +49,14 @@ function Login() {
     }
 
     return (
-        <div style={{
+        <div className="login-page" style={{
             display: 'flex',
             height: '100vh',
             width: '100vw',
             overflow: 'hidden'
         }}>
             {/* LEFT SIDE: Login Form */}
-            <div style={{
+            <div className="login-panel" style={{
                 flex: '1',
                 maxWidth: '500px',
                 background: '#fff',
@@ -94,7 +98,7 @@ function Login() {
                                 className="form-control"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="nhanvien@airport.vn"
+                                placeholder="admin@company.local"
                                 required
                                 style={{ width: '100%', padding: '12px 12px 12px 45px', fontSize: '1rem', background: '#f8f9fa', border: '1px solid #e0e0e0' }}
                             />
@@ -132,12 +136,12 @@ function Login() {
                 </form>
 
                 <div style={{ marginTop: 'auto', paddingTop: '40px', color: '#999', fontSize: '0.9rem' }}>
-                    &copy; 2024 Airport HR Management System
+                    &copy; 2026 Việt Nhật IPT
                 </div>
             </div>
 
-            {/* RIGHT SIDE: Airport Visual */}
-            <div style={{
+            {/* RIGHT SIDE: Brand visual */}
+            <div className="login-visual" style={{
                 flex: '1',
                 background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%)',
                 display: 'flex',
@@ -170,9 +174,9 @@ function Login() {
                 }}></div>
 
                 <div style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
-                    <i className="fas fa-city" style={{ fontSize: '6rem', marginBottom: '30px', opacity: 0.9 }}></i>
-                    <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '10px', letterSpacing: '2px' }}>CẢNG HÀNG KHÔNG</h1>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: '300', opacity: 0.8, letterSpacing: '5px' }}>QUỐC TẾ</h3>
+                    <img src="/logo.png" alt="" className="login-visual__logo" />
+                    <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '10px', letterSpacing: '2px' }}>VIỆT NHẬT IPT</h1>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: '300', opacity: 0.8, letterSpacing: '5px' }}>QUẢN TRỊ NHÂN SỰ</h3>
 
                     <div style={{
                         width: '100px',

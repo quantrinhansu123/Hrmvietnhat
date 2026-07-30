@@ -646,8 +646,8 @@ function KPI() {
               onClick={exportKPIResultsToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -720,8 +720,8 @@ function KPI() {
                   className="btn"
                   onClick={exportKPITemplatesToExcel}
                   style={{
-                    background: '#28a745',
-                    borderColor: '#28a745',
+                    background: 'var(--primary)',
+                    borderColor: 'var(--primary)',
                     color: '#fff',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -849,8 +849,8 @@ function KPI() {
                   onClick={exportEmployeeKPIsToExcel}
                   style={{
                     marginTop: '-20px',
-                    background: '#28a745',
-                    borderColor: '#28a745',
+                    background: 'var(--primary)',
+                    borderColor: 'var(--primary)',
                     color: '#fff',
                     display: 'inline-flex',
                     alignItems: 'center',

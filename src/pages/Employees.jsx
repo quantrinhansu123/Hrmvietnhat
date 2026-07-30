@@ -723,8 +723,8 @@ function Employees() {
                             onClick={exportToExcel}
                             style={{
                                 marginRight: '10px',
-                                background: '#28a745',
-                                borderColor: '#28a745',
+                                background: 'var(--primary)',
+                                borderColor: 'var(--primary)',
                                 color: '#fff'
                             }}
                         >

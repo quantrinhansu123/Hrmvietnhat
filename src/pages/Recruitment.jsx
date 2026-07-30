@@ -852,7 +852,7 @@ function Recruitment() {
                           {showConvert && (
                             <button
                               className="btn btn-sm"
-                              style={{ background: '#28a745', color: '#fff', marginLeft: '4px' }}
+                              style={{ background: 'var(--primary)', color: '#fff', marginLeft: '4px' }}
                               onClick={() => handleConvertToEmployee(c)}
                               title="Chuyển sang Nhân viên thử việc"
                             >

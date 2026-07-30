@@ -28,8 +28,6 @@ export function AuthProvider({ children }) {
     const logout = () => {
         setUser(null)
         localStorage.removeItem('hr_user')
-        // creating a simple event to notify other components if needed, or just rely on state
-        window.location.href = '/login'
     }
 
     return (

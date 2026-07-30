@@ -102,15 +102,6 @@
   position: absolute;
   inset: 0;
   z-index: 4;
-  animation: orbitSpin 30s linear infinite;
-  will-change: transform;
-}
-
-.orbit-stage:has(.orbit-link:hover) .orbit-menu,
-.orbit-stage:has(.orbit-link:hover) .orbit-counter,
-.orbit-stage:has(.orbit-link:focus-visible) .orbit-menu,
-.orbit-stage:has(.orbit-link:focus-visible) .orbit-counter {
-  animation-play-state: paused;
 }
 
 .orbit-node {
@@ -123,9 +114,8 @@
 }
 
 .orbit-counter {
-  animation: orbitCounterSpin 30s linear infinite;
+  transform: rotate(var(--counter-angle));
   transform-origin: center;
-  will-change: transform;
 }
 
 .orbit-link {
@@ -186,15 +176,6 @@
 .dashboard-menu__hint i {
   color: var(--primary);
   margin-right: 7px;
-}
-
-@keyframes orbitSpin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes orbitCounterSpin {
-  from { transform: rotate(var(--counter-angle)); }
-  to { transform: rotate(calc(var(--counter-angle) - 360deg)); }
 }
 
 @keyframes logoPulse {

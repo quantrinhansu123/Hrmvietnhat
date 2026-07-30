@@ -902,8 +902,8 @@ function Competency() {
               onClick={exportFrameworkToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -947,8 +947,8 @@ function Competency() {
               onClick={exportEvaluationsToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -1002,8 +1002,8 @@ function Competency() {
               onClick={exportTrainingToExcel}
               style={{
                 marginLeft: '10px',
-                background: '#28a745',
-                borderColor: '#28a745',
+                background: 'var(--primary)',
+                borderColor: 'var(--primary)',
                 color: '#fff',
                 display: 'inline-flex',
                 alignItems: 'center',

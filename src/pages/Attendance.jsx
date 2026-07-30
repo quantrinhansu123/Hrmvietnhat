@@ -1046,7 +1046,7 @@ function Attendance() {
                         <th key={day} style={{ width: '40px', textAlign: 'center', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>{day}</th>
                       ))
                     })()}
-                    <th style={{ width: '60px', textAlign: 'center', background: '#e8f5e9', position: 'sticky', top: 0, right: 0, zIndex: 10 }}>Tổng</th>
+                    <th style={{ width: '60px', textAlign: 'center', background: 'var(--primary-soft)', position: 'sticky', top: 0, right: 0, zIndex: 10 }}>Tổng</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1159,7 +1159,7 @@ function Attendance() {
                               </td>
                             )
                           })}
-                          <td style={{ textAlign: 'center', fontWeight: 'bold', background: '#e8f5e9' }}>
+                          <td style={{ textAlign: 'center', fontWeight: 'bold', background: 'var(--primary-soft)' }}>
                             {totalWorkdays}
                           </td>
                         </tr>

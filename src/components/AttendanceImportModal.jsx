@@ -590,7 +590,7 @@ function AttendanceImportModal({ employees, isOpen, onClose, onSave }) {
                   <i className="fas fa-download"></i> Tải file mẫu (Mã NV + Ngày + Lần 1–7)
                 </button>
               </div>
-              <div className="alert alert-info" style={{ marginTop: '15px', background: '#e8f5e9', padding: '10px', borderRadius: '4px' }}>
+              <div className="alert alert-info" style={{ marginTop: '15px', background: 'var(--primary-soft)', padding: '10px', borderRadius: '4px' }}>
                 <small>
                   <strong>Mẫu mới hỗ trợ:</strong><br />
                   Cột: <code>Mã NV | Tên NV | Phòng ban | Ngày | Lần 1 … Lần 7</code><br />

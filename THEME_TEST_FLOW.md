@@ -9,7 +9,26 @@ npm run dev
 
 Mở `http://localhost:5173`.
 
-## 2. Kiểm tra khung giao diện chung
+## 2. Kiểm tra đăng nhập và đăng xuất
+
+Tài khoản seed dùng để kiểm thử:
+
+- Email: `admin@company.local`
+- Mật khẩu: `123456`
+
+Thực hiện:
+
+1. Khi chưa đăng nhập, mở thẳng `/dashboard`.
+2. Xác nhận hệ thống tự chuyển về `/login`.
+3. Nhập tài khoản admin và chọn **Đăng nhập**.
+4. Xác nhận hệ thống chuyển tới `/dashboard` và header hiển thị đúng tên người dùng.
+5. Chọn khu vực avatar ở góc phải, sau đó chọn **Đăng xuất**.
+6. Xác nhận phiên đăng nhập bị xóa và hệ thống quay lại `/login`.
+7. Nhấn nút Back hoặc mở lại `/dashboard`; hệ thống vẫn phải yêu cầu đăng nhập.
+
+> `123456` chỉ là mật khẩu seed phục vụ thiết lập ban đầu. Phải đổi mật khẩu trước khi dùng môi trường thật.
+
+## 3. Kiểm tra khung giao diện chung
 
 Thực hiện trên màn hình desktop từ 1366 px trở lên:
 
@@ -22,15 +41,15 @@ Thực hiện trên màn hình desktop từ 1366 px trở lên:
 Kết quả mong đợi:
 
 - Nền nội dung xám rất nhạt, card màu trắng và có viền mảnh.
-- Nút chính, icon trang trí, tab active, focus input và loading spinner dùng màu đỏ.
+- Nút chính, nút xuất/nhập dữ liệu, icon trang trí, tab active, focus input và loading spinner dùng màu đỏ.
 - Không còn màu xanh hoặc tím dùng làm màu trang trí.
 - Xanh lá và vàng/cam chỉ xuất hiện ở trạng thái thành công hoặc cảnh báo.
 
-## 3. Kiểm tra từng module
+## 4. Kiểm tra từng module
 
 | Bước | Đường dẫn | Thao tác | Kết quả mong đợi |
 | --- | --- | --- | --- |
-| 1 | `/dashboard` | Quan sát vòng menu, hover một chức năng | 8 chức năng dùng các sắc đỏ; hover dừng vòng quay; không cắt nội dung |
+| 1 | `/dashboard` | Quan sát vòng menu trong ít nhất 30 giây, sau đó chọn một chức năng | 8 chức năng dùng các sắc đỏ; vòng menu đứng yên hoàn toàn; không cắt nội dung |
 | 2 | `/employees` | Dùng bộ lọc, chuyển tab, mở form thêm/sửa | Card, tab, nút và focus input theo theme đỏ; modal hiển thị đầy đủ |
 | 3 | `/recruitment` | Chuyển các tab và mở form tuyển dụng | Nút chính màu đỏ; vùng thông tin dùng nền đỏ nhạt |
 | 4 | `/salary` | Chuyển các bảng lương, mở chi tiết | Header bảng trung tính; nút thao tác chính màu đỏ; trạng thái vẫn dễ phân biệt |
@@ -40,7 +59,7 @@ Kết quả mong đợi:
 | 8 | `/approvals` | Chuyển danh sách, mở chi tiết đề xuất | Bố cục giữ nguyên; pending/approved/rejected vẫn có màu ngữ nghĩa rõ ràng |
 | 9 | `/attendance` | Chuyển tab, mở import chấm công | Nút chính và liên kết theo theme đỏ; cảnh báo vẫn dùng vàng/cam |
 
-## 4. Kiểm tra responsive
+## 5. Kiểm tra responsive
 
 Mở DevTools, bật chế độ thiết bị và thử hai kích thước:
 
@@ -54,7 +73,7 @@ Thực hiện:
 3. Mở `/approvals`: sidebar desktop được ẩn theo bố cục riêng của trang; nội dung không tạo thanh cuộn ngang toàn trang.
 4. Cuộn trang và xác nhận header/menu vẫn dễ truy cập.
 
-## 5. Kiểm tra build
+## 6. Kiểm tra build
 
 ```bash
 npm run build
