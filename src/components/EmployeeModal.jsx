@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../services/supabase'
-import { mapAppToUser, runUsersMutationWithSchemaFallback } from '../utils/helpers'
+import { mapAppToNhanSu, runUsersMutationWithSchemaFallback } from '../utils/helpers'
 
 function normalizeFiles(files = []) {
   return (files || []).map((file, idx) => {
@@ -441,12 +441,12 @@ function EmployeeModal({
       const payloadForm = { ...formData, files: filledDocs }
 
       if (employee && employee.id) {
-        const dbPayload = mapAppToUser(payloadForm)
+        const dbPayload = mapAppToNhanSu(payloadForm)
         const mutationResult = await runUsersMutationWithSchemaFallback(
           (payload) => supabase
-            .from('users')
+            .from('nhan_su')
             .update(payload)
-            .eq('id', employee.id),
+            .eq('ma_nhan_su', employee.id),
           dbPayload
         )
         const { error } = mutationResult
@@ -477,13 +477,17 @@ function EmployeeModal({
         if (readOnly) return
         if ('id' in formData) delete formData.id
 
-        const dbPayload = mapAppToUser(payloadForm)
-        dbPayload.password = '123456'
-        dbPayload.id = crypto.randomUUID()
+        const dbPayload = mapAppToNhanSu(payloadForm)
+        if (!dbPayload.ma_nhan_su) {
+          throw new Error('Vui lòng nhập Mã nhân viên')
+        }
+        if (!dbPayload.mat_khau) {
+          dbPayload.mat_khau = '123456'
+        }
 
         const mutationResult = await runUsersMutationWithSchemaFallback(
           (payload) => supabase
-            .from('users')
+            .from('nhan_su')
             .insert([payload]),
           dbPayload
         )

@@ -74,30 +74,13 @@ function Competency() {
   const [trainingImportPreviewData, setTrainingImportPreviewData] = useState([])
   const [isTrainingImporting, setIsTrainingImporting] = useState(false)
 
-  // Bảng 1: Khai báo khung năng lực state
+  // Framework modal state
   const [isFrameworkModalOpen, setIsFrameworkModalOpen] = useState(false)
   const [isFrameworkReadOnly, setIsFrameworkReadOnly] = useState(false)
-
-  // Bảng 1: Khai báo khung năng lực state (Inline Form)
-  const [frameworkForm, setFrameworkForm] = useState({
-    id: null,
-    department: '',
-    position: '',
-    group: 'Chuyên môn',
-    name: '',
-    level: 1,
-    status: 'Áp dụng',
-    note: ''
-  })
-  const [isFrameworkSaving, setIsFrameworkSaving] = useState(false)
 
   // Searchable Select State
   const [searchTerm, setSearchTerm] = useState('')
   const [showDropdown, setShowDropdown] = useState(false)
-
-  // Framework Form Dropdown States
-  const [showPositionDropdown, setShowPositionDropdown] = useState(false)
-  const [showNameDropdown, setShowNameDropdown] = useState(false)
 
   // Sync search term with assessmentForm.employeeId
   useEffect(() => {
@@ -838,51 +821,6 @@ function Competency() {
     }
   }
 
-  // Khung năng lực Logic (Inline Form)
-  const handleFrameworkFormChange = (e) => {
-    const { name, value } = e.target
-    const val = name === 'level' ? (parseInt(value) || 1) : value
-    setFrameworkForm(prev => ({ ...prev, [name]: val }))
-  }
-
-  const handleSaveFramework = async (e) => {
-    e.preventDefault()
-    if (!frameworkForm.department || !frameworkForm.position || !frameworkForm.name) {
-      alert('Vui lòng nhập đầy đủ Bộ phận, Vị trí và Tên năng lực')
-      return
-    }
-
-    try {
-      setIsFrameworkSaving(true)
-      const { id, ...dataToSave } = frameworkForm
-
-      if (id) {
-        // Nếu có ID (trường hợp sửa từ Bảng 1 - dù hiện tại ưu tiên Modal cho sửa)
-        await fbUpdate(`hr/competencyFramework/${id}`, dataToSave)
-        alert('Cập nhật năng lực thành công')
-      } else {
-        await fbPush('hr/competencyFramework', dataToSave)
-        alert('Thêm năng lực thành công')
-      }
-
-      setFrameworkForm({
-        id: null,
-        department: '',
-        position: '',
-        group: 'Chuyên môn',
-        name: '',
-        level: 1,
-        status: 'Áp dụng',
-        note: ''
-      })
-      loadData()
-    } catch (error) {
-      alert('Lỗi khi lưu: ' + error.message)
-    } finally {
-      setIsFrameworkSaving(false)
-    }
-  }
-
   if (loading) {
     return <div className="loadingState">Đang tải dữ liệu...</div>
   }
@@ -896,6 +834,17 @@ function Competency() {
         </h1>
         {activeTab === 'framework' && (
           <>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                setSelectedFramework(null)
+                setIsFrameworkReadOnly(false)
+                setIsFrameworkModalOpen(true)
+              }}
+            >
+              <i className="fas fa-plus"></i>
+              Thêm mới
+            </button>
             <SeedCompetencyDataButton onComplete={loadData} />
             <button
               className="btn"
@@ -1066,221 +1015,19 @@ function Competency() {
       {/* Tab 1: Khung năng lực */}
       {activeTab === 'framework' && (
         <>
-
-          {/* Bảng 1: Khai báo khung năng lực theo vị trí (Inline) */}
-          <div className="card" style={{ marginBottom: '20px' }}>
-            <div className="card-header">
-              <h3 className="card-title">Bảng 1: Khai báo khung năng lực theo vị trí</h3>
-            </div>
-            <div style={{ padding: '15px' }}>
-              <form onSubmit={handleSaveFramework}>
-                <div className="form-row" style={{ display: 'flex', gap: '15px', marginBottom: '15px', flexWrap: 'wrap' }}>
-                  <div className="form-group" style={{ flex: '1', minWidth: '200px' }}>
-                    <label>Bộ phận *</label>
-                    <select
-                      name="department"
-                      value={frameworkForm.department}
-                      onChange={handleFrameworkFormChange}
-                      style={{ width: '100%', padding: '8px' }}
-                      required
-                    >
-                      <option value="">Chọn bộ phận</option>
-                      {['MKT', 'Sale', 'BOD', 'Nhân sự', 'Kế toán', 'Vận đơn', 'CSKH'].sort().map(d => (
-                        <option key={d} value={d}>{d}</option>
-                      ))}
-                      {[...new Set(employees.map(e => e.bo_phan || e.department).filter(Boolean))].filter(d => !['MKT', 'Sale', 'BOD', 'Nhân sự', 'Kế toán', 'Vận đơn', 'CSKH'].includes(d)).map(d => (
-                        <option key={d} value={d}>{d}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="form-group" style={{ flex: '1', minWidth: '200px', position: 'relative' }}>
-                    <label>Vị trí *</label>
-                    <input
-                      type="text"
-                      name="position"
-                      value={frameworkForm.position}
-                      onChange={handleFrameworkFormChange}
-                      onFocus={() => setShowPositionDropdown(true)}
-                      onBlur={() => setTimeout(() => setShowPositionDropdown(false), 200)}
-                      placeholder="Nhập vị trí mới hoặc chọn từ danh sách..."
-                      style={{ width: '100%', padding: '8px' }}
-                      required
-                      autoComplete="off"
-                    />
-                    {showPositionDropdown && (
-                      <ul style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: 0,
-                        right: 0,
-                        maxHeight: '200px',
-                        overflowY: 'auto',
-                        background: '#fff',
-                        border: '1px solid #ccc',
-                        borderRadius: '0 0 4px 4px',
-                        zIndex: 1000,
-                        margin: 0,
-                        padding: 0,
-                        listStyle: 'none',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                      }}>
-                        {[...new Set([
-                          ...competencyFramework.map(c => c.position),
-                          ...employees.map(e => e.vi_tri || e.position)
-                        ].filter(Boolean))].sort().filter(p => normalizeString(p).includes(normalizeString(frameworkForm.position || ''))).map((pos, idx) => (
-                          <li
-                            key={idx}
-                            onClick={() => setFrameworkForm(prev => ({ ...prev, position: pos }))}
-                            style={{ padding: '8px 10px', cursor: 'pointer', borderBottom: '1px solid #eee' }}
-                            onMouseDown={(e) => e.preventDefault()}
-                          >
-                            {pos}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-
-                  <div className="form-group" style={{ flex: '1', minWidth: '200px' }}>
-                    <label>Nhóm năng lực *</label>
-                    <select
-                      name="group"
-                      value={frameworkForm.group}
-                      onChange={handleFrameworkFormChange}
-                      style={{ width: '100%', padding: '8px' }}
-                      required
-                    >
-                      <option value="Chuyên môn">Chuyên môn</option>
-                      <option value="Lãnh đạo">Lãnh đạo</option>
-                      <option value="Cá nhân">Cá nhân</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-row" style={{ display: 'flex', gap: '15px', marginBottom: '15px', flexWrap: 'wrap' }}>
-                  <div className="form-group" style={{ flex: '2', minWidth: '300px', position: 'relative' }}>
-                    <label>Tên năng lực *</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={frameworkForm.name}
-                      onChange={handleFrameworkFormChange}
-                      onFocus={() => setShowNameDropdown(true)}
-                      onBlur={() => setTimeout(() => setShowNameDropdown(false), 200)}
-                      placeholder="VD: Lập kế hoạch & giám sát KPI"
-                      style={{ width: '100%', padding: '8px' }}
-                      required
-                      autoComplete="off"
-                    />
-                    {showNameDropdown && (
-                      <ul style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: 0,
-                        right: 0,
-                        maxHeight: '200px',
-                        overflowY: 'auto',
-                        background: '#fff',
-                        border: '1px solid #ccc',
-                        borderRadius: '0 0 4px 4px',
-                        zIndex: 1000,
-                        margin: 0,
-                        padding: 0,
-                        listStyle: 'none',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                      }}>
-                        {[...new Set(competencyFramework.map(c => c.name).filter(Boolean))].sort()
-                          .filter(n => normalizeString(n).includes(normalizeString(frameworkForm.name || '')))
-                          .map((name, idx) => (
-                            <li
-                              key={idx}
-                              onClick={() => setFrameworkForm(prev => ({ ...prev, name: name }))}
-                              style={{ padding: '8px 10px', cursor: 'pointer', borderBottom: '1px solid #eee' }}
-                              onMouseDown={(e) => e.preventDefault()}
-                            >
-                              {name}
-                            </li>
-                          ))}
-                      </ul>
-                    )}
-                  </div>
-
-                  <div className="form-group" style={{ flex: '1', minWidth: '150px' }}>
-                    <label>Level yêu cầu (1-5) *</label>
-                    <select
-                      name="level"
-                      value={frameworkForm.level}
-                      onChange={handleFrameworkFormChange}
-                      style={{ width: '100%', padding: '8px' }}
-                      required
-                    >
-                      {[1, 2, 3, 4, 5].map(l => (
-                        <option key={l} value={l}>{l}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group" style={{ flex: '1', minWidth: '150px' }}>
-                    <label>Trạng thái</label>
-                    <select
-                      name="status"
-                      value={frameworkForm.status}
-                      onChange={handleFrameworkFormChange}
-                      style={{ width: '100%', padding: '8px' }}
-                    >
-                      <option value="Áp dụng">Áp dụng</option>
-                      <option value="Ngừng">Ngừng</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="form-group" style={{ marginBottom: '15px' }}>
-                  <label>Ghi chú</label>
-                  <textarea
-                    name="note"
-                    value={frameworkForm.note}
-                    onChange={handleFrameworkFormChange}
-                    rows="2"
-                    style={{ width: '100%', padding: '8px' }}
-                  />
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
-                  {frameworkForm.id && (
-                    <button
-                      type="button"
-                      className="btn"
-                      onClick={() => setFrameworkForm({
-                        id: null,
-                        department: '',
-                        position: '',
-                        group: 'Chuyên môn',
-                        name: '',
-                        level: 1,
-                        status: 'Áp dụng',
-                        note: ''
-                      })}
-                    >Hủy</button>
-                  )}
-                  <button type="submit" className="btn btn-primary" disabled={isFrameworkSaving}>
-                    {isFrameworkSaving ? 'Đang lưu...' : (frameworkForm.id ? 'Cập nhật Năng lực' : 'Tạo mới Năng lực')}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-
-          {/* Bảng 2: Danh mục khung năng lực theo bộ phận (Ma trận) */}
-          <div className="card" style={{ marginBottom: '20px' }}>
-            <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3 className="card-title">Bảng 2: Danh mục khung năng lực theo bộ phận</h3>
+          {/* Ma trận khung năng lực theo bộ phận */}
+          <div className="card salary-table-card" style={{ marginBottom: '20px' }}>
+            <div className="salary-table-card__caption">
+              <div>
+                <strong>Ma trận khung năng lực theo bộ phận</strong>
+                <span>Chọn bộ phận để xem level yêu cầu theo vị trí</span>
+              </div>
               <select
                 value={filterDept}
                 onChange={(e) => setFilterDept(e.target.value)}
-                style={{ padding: '8px', borderRadius: '4px' }}
+                style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d0d5dd' }}
               >
-                <option value="">Chọn Bộ phận để xem Ma trận</option>
+                <option value="">Chọn bộ phận</option>
                 {[...new Set(competencyFramework.map(c => c.department).filter(Boolean))].sort().map(dept => (
                   <option key={dept} value={dept}>{dept}</option>
                 ))}
@@ -1288,20 +1035,20 @@ function Competency() {
             </div>
             {filterDept ? (
               matrixPositions.length > 0 ? (
-                <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: '500px', border: '1px solid #e0e0e0', padding: 0 }}>
-                  <table style={{ minWidth: '101%', marginBottom: 0 }}>
+                <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '500px' }}>
+                  <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                     <thead>
                       <tr>
-                        <th rowSpan="2" style={{ position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 12, minWidth: '50px' }}>STT</th>
-                        <th rowSpan="2" style={{ position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 12, minWidth: '150px' }}>Nhóm năng lực</th>
-                        <th rowSpan="2" style={{ position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 12, minWidth: '200px' }}>Tên năng lực</th>
+                        <th rowSpan="2" style={{ minWidth: '50px' }}>STT</th>
+                        <th rowSpan="2" style={{ minWidth: '150px' }}>Nhóm năng lực</th>
+                        <th rowSpan="2" style={{ minWidth: '200px' }}>Tên năng lực</th>
                         {matrixPositions.map(pos => (
-                          <th key={pos} style={{ position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 12, minWidth: '100px' }}>{pos}</th>
+                          <th key={pos} style={{ minWidth: '100px' }}>{pos}</th>
                         ))}
                       </tr>
                       <tr>
                         {matrixPositions.map((pos, idx) => (
-                          <th key={`code_${pos}`} style={{ fontSize: '0.85em', color: '#666', background: '#f8f9fa', position: 'sticky', top: '40px', zIndex: 11 }}>B{idx + 1}</th>
+                          <th key={`code_${pos}`} style={{ fontSize: '0.72rem', color: '#98a2b3' }}>B{idx + 1}</th>
                         ))}
                       </tr>
                     </thead>
@@ -1313,8 +1060,10 @@ function Competency() {
                             <td>{row.group}</td>
                             <td>{row.name}</td>
                             {matrixPositions.map(pos => (
-                              <td key={pos} style={{ textAlign: 'center', fontWeight: 'bold', color: row.levels[pos] !== '–' ? 'var(--primary)' : 'inherit' }}>
-                                {row.levels[pos] || '–'}
+                              <td key={pos} style={{ textAlign: 'center' }}>
+                                {row.levels[pos] && row.levels[pos] !== '–' ? (
+                                  <span className="salary-level-chip">{row.levels[pos]}</span>
+                                ) : '–'}
                               </td>
                             ))}
                           </tr>
@@ -1333,30 +1082,33 @@ function Competency() {
                 <p className="empty-state" style={{ padding: '40px' }}>Bộ phận này chưa có dữ liệu khung năng lực</p>
               )
             ) : (
-              <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
+              <div style={{ padding: '40px', textAlign: 'center', color: '#667085' }}>
                 <i className="fas fa-hand-pointer" style={{ fontSize: '24px', marginBottom: '10px' }}></i>
-                <p>Vui lòng chọn <strong>Bộ phận</strong> ở trên để hiển thị Ma trận năng lực</p>
+                <p>Vui lòng chọn <strong>Bộ phận</strong> ở trên để hiển thị ma trận năng lực</p>
               </div>
             )}
           </div>
 
-          {/* Bảng 3: Danh sách tổng hợp */}
-          <div className="card">
-            <div className="card-header">
-              <h3 className="card-title">Bảng 3: Danh sách chi tiết khung năng lực</h3>
+          {/* Danh sách chi tiết */}
+          <div className="card salary-table-card">
+            <div className="salary-table-card__caption">
+              <div>
+                <strong>Danh sách chi tiết khung năng lực</strong>
+                <span>{competencyFramework.length} năng lực đã khai báo</span>
+              </div>
             </div>
-            <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: '500px', border: '1px solid #e0e0e0' }}>
-              <table style={{ minWidth: '101%', marginBottom: 0 }}>
+            <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '500px' }}>
+              <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                 <thead>
                   <tr>
-                    <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
-                    <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Bộ phận</th>
-                    <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Vị trí</th>
-                    <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Nhóm năng lực</th>
-                    <th style={{ minWidth: '250px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Tên năng lực</th>
-                    <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Level yêu cầu</th>
-                    <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Trạng thái</th>
-                    <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Thao tác</th>
+                    <th style={{ minWidth: '50px' }}>STT</th>
+                    <th style={{ minWidth: '140px' }}>Bộ phận</th>
+                    <th style={{ minWidth: '180px' }}>Vị trí</th>
+                    <th style={{ minWidth: '140px' }}>Nhóm năng lực</th>
+                    <th style={{ minWidth: '240px' }}>Tên năng lực</th>
+                    <th style={{ minWidth: '100px' }}>Level</th>
+                    <th style={{ minWidth: '120px' }}>Trạng thái</th>
+                    <th style={{ minWidth: '70px' }}></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1368,43 +1120,46 @@ function Competency() {
                         <td>{c.position || '-'}</td>
                         <td>{c.group || '-'}</td>
                         <td>{c.name || '-'}</td>
-                        <td style={{ textAlign: 'center' }}>{c.level || '-'}</td>
+                        <td>
+                          <span className="salary-level-chip">{c.level || '-'}</span>
+                        </td>
                         <td>
                           <span className={`badge ${c.status === 'Áp dụng' ? 'badge-success' : 'badge-danger'}`}>
                             {c.status || 'Áp dụng'}
                           </span>
                         </td>
                         <td>
-                          <div className="actions">
-                            <button
-                              className="view"
-                              onClick={() => {
-                                setSelectedFramework(c)
-                                setIsFrameworkReadOnly(true)
-                                setIsFrameworkModalOpen(true)
-                              }}
-                              title="Xem chi tiết"
-                            >
-                              <i className="fas fa-eye"></i>
-                            </button>
-                            <button
-                              className="edit"
-                              onClick={() => {
-                                setSelectedFramework(c)
-                                setIsFrameworkReadOnly(false)
-                                setIsFrameworkModalOpen(true)
-                              }}
-                              title="Sửa"
-                            >
-                              <i className="fas fa-edit"></i>
-                            </button>
-                            <button
-                              className="delete"
-                              onClick={() => handleDeleteFramework(c.id)}
-                            >
-                              <i className="fas fa-trash"></i>
-                            </button>
-                          </div>
+                          <details className="salary-action-menu">
+                            <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                            <div className="salary-action-menu__dropdown">
+                              <button
+                                className="view"
+                                onClick={() => {
+                                  setSelectedFramework(c)
+                                  setIsFrameworkReadOnly(true)
+                                  setIsFrameworkModalOpen(true)
+                                }}
+                              >
+                                <i className="far fa-eye"></i><span>Xem</span>
+                              </button>
+                              <button
+                                className="edit"
+                                onClick={() => {
+                                  setSelectedFramework(c)
+                                  setIsFrameworkReadOnly(false)
+                                  setIsFrameworkModalOpen(true)
+                                }}
+                              >
+                                <i className="far fa-pen-to-square"></i><span>Sửa</span>
+                              </button>
+                              <button
+                                className="delete"
+                                onClick={() => handleDeleteFramework(c.id)}
+                              >
+                                <i className="far fa-trash-can"></i><span>Xóa</span>
+                              </button>
+                            </div>
+                          </details>
                         </td>
                       </tr>
                     ))
@@ -1650,14 +1405,17 @@ function Competency() {
                 </div>
               </div>
             </div>
-            <div className="card" style={{ marginBottom: '20px' }}>
-              <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 className="card-title">Bảng 2: Kết quả đánh giá năng lực</h3>
+            <div className="card salary-table-card" style={{ marginBottom: '20px' }}>
+              <div className="salary-table-card__caption">
+                <div>
+                  <strong>Kết quả đánh giá năng lực</strong>
+                  <span>{filteredEvaluations.length} bản ghi</span>
+                </div>
                 <div className="search-box" style={{ display: 'flex', gap: '10px' }}>
                   <select
                     value={filterEvaluationDept}
                     onChange={(e) => setFilterEvaluationDept(e.target.value)}
-                    style={{ padding: '8px', borderRadius: '4px' }}
+                    style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d0d5dd' }}
                   >
                     <option value="">Tất cả bộ phận</option>
                     {[...new Set(evaluations.map(e => e.department).filter(Boolean))].sort().map(dept => (
@@ -1667,7 +1425,7 @@ function Competency() {
                   <select
                     value={filterEvaluationPeriod}
                     onChange={(e) => setFilterEvaluationPeriod(e.target.value)}
-                    style={{ padding: '8px', borderRadius: '4px' }}
+                    style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d0d5dd' }}
                   >
                     <option value="">Tất cả kỳ</option>
                     {[...new Set(evaluations.map(e => e.period).filter(Boolean))].sort().map(period => (
@@ -1676,21 +1434,21 @@ function Competency() {
                   </select>
                 </div>
               </div>
-              <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)', border: '1px solid #e0e0e0' }}>
-                <table style={{ minWidth: '101%', marginBottom: 0 }}>
+              <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)' }}>
+                <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                   <thead>
                     <tr>
-                      <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
-                      <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Kỳ đánh giá</th>
-                      <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Mã NV</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Họ và tên</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Bộ phận</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Vị trí</th>
-                      <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Điểm YC</th>
-                      <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Điểm KQ</th>
-                      <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Kết quả</th>
-                      <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Ngày đánh giá</th>
-                      <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Thao tác</th>
+                      <th style={{ minWidth: '50px' }}>STT</th>
+                      <th style={{ minWidth: '120px' }}>Kỳ đánh giá</th>
+                      <th style={{ minWidth: '100px' }}>Mã NV</th>
+                      <th style={{ minWidth: '200px' }}>Họ và tên</th>
+                      <th style={{ minWidth: '140px' }}>Bộ phận</th>
+                      <th style={{ minWidth: '180px' }}>Vị trí</th>
+                      <th style={{ minWidth: '90px' }}>Điểm YC</th>
+                      <th style={{ minWidth: '90px' }}>Điểm KQ</th>
+                      <th style={{ minWidth: '120px' }}>Kết quả</th>
+                      <th style={{ minWidth: '120px' }}>Ngày đánh giá</th>
+                      <th style={{ minWidth: '70px' }}></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1709,8 +1467,8 @@ function Competency() {
                             <td>{employee ? (employee.ho_va_ten || employee.name || '-') : (evaluation.employeeName || '-')}</td>
                             <td>{evaluation.department || '-'}</td>
                             <td>{evaluation.position || '-'}</td>
-                            <td style={{ fontWeight: 'bold' }}>{avgRequired.toFixed(1)}</td>
-                            <td style={{ fontWeight: 'bold', color: 'var(--primary)' }}>{avgAchieved.toFixed(1)}</td>
+                            <td>{Number(avgRequired).toFixed(1)}</td>
+                            <td style={{ color: 'var(--primary)', fontWeight: 700 }}>{Number(avgAchieved).toFixed(1)}</td>
                             <td>
                               <span className={`badge ${result === 'Đạt' ? 'badge-success' : 'badge-warning'}`}>
                                 {result}
@@ -1718,39 +1476,38 @@ function Competency() {
                             </td>
                             <td>{evaluation.evaluationDate ? new Date(evaluation.evaluationDate).toLocaleDateString('vi-VN') : '-'}</td>
                             <td>
-                              <div className="actions">
-                                <button
-                                  className="view"
-                                  onClick={() => {
-                                    setSelectedEvaluationDetail(evaluation)
-                                    setIsEvaluationDetailModalOpen(true)
-                                  }}
-                                  title="Xem chi tiết"
-                                >
-                                  <i className="fas fa-eye"></i>
-                                </button>
-                                <button
-                                  className="edit"
-                                  onClick={() => {
-                                    const emp = employees.find(e => e.id === evaluation.employeeId)
-                                    setAssessmentForm({ ...evaluation })
-                                    // Load items based on the saved position (or employee position if missing) and department
-                                    loadAssessmentItems(evaluation.position || (emp ? emp.vi_tri : ''), evaluation.department, evaluation.items)
-                                    // Scroll to top to see Bảng 1
-                                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                                  }}
-                                  title="Sửa (Load lên Bảng 1)"
-                                >
-                                  <i className="fas fa-edit"></i>
-                                </button>
-                              </div>
+                              <details className="salary-action-menu">
+                                <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                                <div className="salary-action-menu__dropdown">
+                                  <button
+                                    className="view"
+                                    onClick={() => {
+                                      setSelectedEvaluationDetail(evaluation)
+                                      setIsEvaluationDetailModalOpen(true)
+                                    }}
+                                  >
+                                    <i className="far fa-eye"></i><span>Xem</span>
+                                  </button>
+                                  <button
+                                    className="edit"
+                                    onClick={() => {
+                                      const emp = employees.find(e => e.id === evaluation.employeeId)
+                                      setAssessmentForm({ ...evaluation })
+                                      loadAssessmentItems(evaluation.position || (emp ? emp.vi_tri : ''), evaluation.department, evaluation.items)
+                                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                                    }}
+                                  >
+                                    <i className="far fa-pen-to-square"></i><span>Sửa</span>
+                                  </button>
+                                </div>
+                              </details>
                             </td>
                           </tr>
                         )
                       })
                     ) : (
                       <tr>
-                        <td colSpan="11" className="empty-state">Chưa có đánh giá năng lượng</td>
+                        <td colSpan="11" className="empty-state">Chưa có đánh giá năng lực</td>
                       </tr>
                     )}
                   </tbody>
@@ -1765,24 +1522,27 @@ function Competency() {
       {
         activeTab === 'training' && (
           <>
-            <div className="card" style={{ marginBottom: '20px' }}>
-              <div className="card-header">
-                <h3 className="card-title">Bảng 1: Danh sách chương trình đào tạo</h3>
+            <div className="card salary-table-card" style={{ marginBottom: '20px' }}>
+              <div className="salary-table-card__caption">
+                <div>
+                  <strong>Danh sách chương trình đào tạo</strong>
+                  <span>{trainingPrograms.length} chương trình</span>
+                </div>
               </div>
-              <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)', border: '1px solid #e0e0e0' }}>
-                <table style={{ minWidth: '101%', marginBottom: 0 }}>
+              <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)' }}>
+                <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                   <thead>
                     <tr>
-                      <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
-                      <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Mã chương trình</th>
-                      <th style={{ minWidth: '250px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Tên chương trình đào tạo</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Hình thức đào tạo</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Đơn vị đào tạo</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Thời gian bắt đầu</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Thời gian kết thúc</th>
-                      <th style={{ minWidth: '250px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Mục tiêu đào tạo</th>
-                      <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Trạng thái</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Thao tác</th>
+                      <th style={{ minWidth: '50px' }}>STT</th>
+                      <th style={{ minWidth: '120px' }}>Mã CT</th>
+                      <th style={{ minWidth: '220px' }}>Tên chương trình</th>
+                      <th style={{ minWidth: '140px' }}>Hình thức</th>
+                      <th style={{ minWidth: '180px' }}>Đơn vị đào tạo</th>
+                      <th style={{ minWidth: '120px' }}>Bắt đầu</th>
+                      <th style={{ minWidth: '120px' }}>Kết thúc</th>
+                      <th style={{ minWidth: '220px' }}>Mục tiêu</th>
+                      <th style={{ minWidth: '120px' }}>Trạng thái</th>
+                      <th style={{ minWidth: '70px' }}></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1807,47 +1567,48 @@ function Competency() {
                             </span>
                           </td>
                           <td>
-                            <div className="actions">
-                              <button
-                                className="edit"
-                                onClick={() => {
-                                  setSelectedTraining(training)
-                                  setIsTrainingModalOpen(true)
-                                }}
-                              >
-                                <i className="fas fa-edit"></i>
-                              </button>
-                              <button
-                                className="delete"
-                                onClick={() => handleDeleteTraining(training.id)}
-                              >
-                                <i className="fas fa-trash"></i>
-                              </button>
-                              <button
-                                className="view"
-                                onClick={() => {
-                                  setSelectedTraining(training)
-                                  setParticipantInitialView('participants')
-                                  setIsParticipantModalOpen(true)
-                                }}
-                                title="Gán học viên"
-                              >
-                                <i className="fas fa-user-plus"></i>
-                              </button>
-                              {training.status === 'Đã kết thúc' && (
+                            <details className="salary-action-menu">
+                              <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                              <div className="salary-action-menu__dropdown">
+                                <button
+                                  className="edit"
+                                  onClick={() => {
+                                    setSelectedTraining(training)
+                                    setIsTrainingModalOpen(true)
+                                  }}
+                                >
+                                  <i className="far fa-pen-to-square"></i><span>Sửa</span>
+                                </button>
                                 <button
                                   className="view"
                                   onClick={() => {
                                     setSelectedTraining(training)
-                                    setParticipantInitialView('results')
+                                    setParticipantInitialView('participants')
                                     setIsParticipantModalOpen(true)
                                   }}
-                                  title="Xem chi tiết & kết quả"
                                 >
-                                  <i className="fas fa-eye"></i>
+                                  <i className="fas fa-user-plus"></i><span>Gán học viên</span>
                                 </button>
-                              )}
-                            </div>
+                                {training.status === 'Đã kết thúc' && (
+                                  <button
+                                    className="view"
+                                    onClick={() => {
+                                      setSelectedTraining(training)
+                                      setParticipantInitialView('results')
+                                      setIsParticipantModalOpen(true)
+                                    }}
+                                  >
+                                    <i className="far fa-eye"></i><span>Xem kết quả</span>
+                                  </button>
+                                )}
+                                <button
+                                  className="delete"
+                                  onClick={() => handleDeleteTraining(training.id)}
+                                >
+                                  <i className="far fa-trash-can"></i><span>Xóa</span>
+                                </button>
+                              </div>
+                            </details>
                           </td>
                         </tr>
                       ))
@@ -1861,14 +1622,17 @@ function Competency() {
               </div>
             </div>
 
-            {/* Bảng 2: Danh sách học viên tham gia */}
-            <div className="card">
-              <div className="card-header">
-                <h3 className="card-title">Bảng 2: Danh sách học viên tham gia</h3>
+            {/* Danh sách học viên tham gia */}
+            <div className="card salary-table-card">
+              <div className="salary-table-card__caption">
+                <div>
+                  <strong>Danh sách học viên tham gia</strong>
+                  <span>{filteredParticipants.length} học viên</span>
+                </div>
                 <select
                   value={filterTrainingProgram}
                   onChange={(e) => setFilterTrainingProgram(e.target.value)}
-                  style={{ padding: '8px', borderRadius: '4px' }}
+                  style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #d0d5dd' }}
                 >
                   <option value="">Tất cả chương trình</option>
                   {trainingPrograms.map(t => (
@@ -1876,20 +1640,20 @@ function Competency() {
                   ))}
                 </select>
               </div>
-              <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)', border: '1px solid #e0e0e0' }}>
-                <table style={{ minWidth: '101%', marginBottom: 0 }}>
+              <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)' }}>
+                <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                   <thead>
                     <tr>
-                      <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
-                      <th style={{ minWidth: '100px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Mã NV</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Họ và tên</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Bộ phận</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Vị trí</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Chương trình đào tạo</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Tình trạng tham gia</th>
-                      <th style={{ minWidth: '150px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Tỷ lệ tham dự (%)</th>
-                      <th style={{ minWidth: '200px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Ghi chú</th>
-                      <th style={{ minWidth: '120px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>Thao tác</th>
+                      <th style={{ minWidth: '50px' }}>STT</th>
+                      <th style={{ minWidth: '100px' }}>Mã NV</th>
+                      <th style={{ minWidth: '180px' }}>Họ và tên</th>
+                      <th style={{ minWidth: '120px' }}>Bộ phận</th>
+                      <th style={{ minWidth: '160px' }}>Vị trí</th>
+                      <th style={{ minWidth: '200px' }}>Chương trình</th>
+                      <th style={{ minWidth: '140px' }}>Tình trạng</th>
+                      <th style={{ minWidth: '110px' }}>Tham dự</th>
+                      <th style={{ minWidth: '180px' }}>Ghi chú</th>
+                      <th style={{ minWidth: '70px' }}></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1916,37 +1680,37 @@ function Competency() {
                             <td>{participant.attendanceRate || participant.tyLeThamDu || 0}%</td>
                             <td>{participant.note || participant.ghiChu || '-'}</td>
                             <td>
-                              <div className="actions">
-                                <button
-                                  className="view"
-                                  onClick={() => {
-                                    setSelectedTraining(training)
-                                    setIsParticipantReadOnly(true)
-                                    setIsParticipantModalOpen(true)
-                                  }}
-                                  title="Xem chi tiết"
-                                >
-                                  <i className="fas fa-eye"></i>
-                                </button>
-                                <button
-                                  className="edit"
-                                  onClick={() => {
-                                    setSelectedTraining(training)
-                                    setIsParticipantReadOnly(false)
-                                    setIsParticipantModalOpen(true)
-                                  }}
-                                  title="Cập nhật trạng thái"
-                                >
-                                  <i className="fas fa-edit"></i>
-                                </button>
-                                <button
-                                  className="delete"
-                                  onClick={() => handleDeleteParticipant(participant.id)}
-                                  title="Xóa học viên"
-                                >
-                                  <i className="fas fa-trash"></i>
-                                </button>
-                              </div>
+                              <details className="salary-action-menu">
+                                <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                                <div className="salary-action-menu__dropdown">
+                                  <button
+                                    className="view"
+                                    onClick={() => {
+                                      setSelectedTraining(training)
+                                      setIsParticipantReadOnly(true)
+                                      setIsParticipantModalOpen(true)
+                                    }}
+                                  >
+                                    <i className="far fa-eye"></i><span>Xem</span>
+                                  </button>
+                                  <button
+                                    className="edit"
+                                    onClick={() => {
+                                      setSelectedTraining(training)
+                                      setIsParticipantReadOnly(false)
+                                      setIsParticipantModalOpen(true)
+                                    }}
+                                  >
+                                    <i className="far fa-pen-to-square"></i><span>Sửa</span>
+                                  </button>
+                                  <button
+                                    className="delete"
+                                    onClick={() => handleDeleteParticipant(participant.id)}
+                                  >
+                                    <i className="far fa-trash-can"></i><span>Xóa</span>
+                                  </button>
+                                </div>
+                              </details>
                             </td>
                           </tr>
                         )

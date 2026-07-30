@@ -107,6 +107,65 @@ export const mapUserToApp = (user) => {
   }
 }
 
+// Map bảng public.nhan_su -> state UI Hồ sơ nhân sự
+export const mapNhanSuToApp = (row) => {
+  if (!row) return null
+  const maNhanSu = row.ma_nhan_su || ''
+  return {
+    id: maNhanSu,
+    employeeId: maNhanSu,
+    ho_va_ten: row.nhan_su || '',
+    email: '',
+    sđt: '',
+    chi_nhanh: row.chi_nhanh || '',
+    bo_phan: row.phong_ban || '',
+    vi_tri: row.Cong_Viec || row.cong_viec || row.vi_tri || '',
+    ma_vi_tri: row.ma_vi_tri || row.vi_tri || '',
+    co_so: row.co_so || '',
+    trang_thai: row.trang_thai || 'Đang làm',
+    ca_lam_viec: row.ca_lam || '',
+    ngay_vao_lam: '',
+    ngay_lam_chinh_thuc: '',
+    cccd: '',
+    ngay_cap: '',
+    noi_cap: '',
+    dia_chi_thuong_tru: '',
+    que_quan: '',
+    ngay_sinh: '',
+    gioi_tinh: '',
+    tinh_trang_hon_nhan: '',
+    avatarDataUrl: row.link_chu_ky || '',
+    files: [],
+    images: [],
+    role: 'user',
+    username: row.ten_dang_nhap || '',
+    password: row.mat_khau || '',
+    quyen_xem: Array.isArray(row.quyen_xem) ? row.quyen_xem : []
+  }
+}
+
+// Map state UI -> bảng public.nhan_su
+export const mapAppToNhanSu = (data) => {
+  if (!data) return null
+  const maNhanSu = data.employeeId || data.employee_id || data.id || data.username || ''
+  return {
+    ma_nhan_su: maNhanSu,
+    nhan_su: data.ho_va_ten || '',
+    phong_ban: data.bo_phan || '',
+    Cong_Viec: data.vi_tri || data.Cong_Viec || '',
+    cong_viec: data.vi_tri || data.cong_viec || '',
+    chi_nhanh: data.chi_nhanh || '',
+    vi_tri: data.ma_vi_tri || data.vi_tri || '',
+    ma_vi_tri: data.ma_vi_tri || '',
+    co_so: data.co_so || '',
+    ca_lam: data.ca_lam_viec || '',
+    trang_thai: data.trang_thai || 'Đang làm',
+    ten_dang_nhap: data.username || data.ten_dang_nhap || '',
+    mat_khau: data.password || data.mat_khau || null,
+    link_chu_ky: data.avatarDataUrl || data.avatarUrl || data.avatar || null
+  }
+}
+
 // Helper to convert DD/MM/YYYY to YYYY-MM-DD
 const formatDateForDB = (dateStr) => {
   if (!dateStr) return null
@@ -177,7 +236,7 @@ export const mapAppToUser = (data) => {
 // "Could not find the 'address' column of 'users' in the schema cache"
 export const getMissingUsersColumnFromError = (error) => {
   const message = error?.message || ''
-  const match = message.match(/Could not find the '([^']+)' column of 'users' in the schema cache/i)
+  const match = message.match(/Could not find the '([^']+)' column of '(?:users|nhan_su)' in the schema cache/i)
   return match?.[1] || null
 }
 

@@ -4,35 +4,44 @@ function Sidebar() {
   const location = useLocation()
 
   const menuItems = [
-    { path: '/dashboard', icon: 'fas fa-home', label: 'Tổng quan' },
-    { path: '/employees', icon: 'fas fa-users', label: 'Hồ sơ nhân sự' },
-    { path: '/recruitment', icon: 'fas fa-user-plus', label: 'Tuyển dụng' },
-    { path: '/salary', icon: 'fas fa-money-bill-wave', label: 'Lương & Phúc lợi' },
-    { path: '/competency', icon: 'fas fa-chart-line', label: 'Khung năng lực' },
-    { path: '/kpi', icon: 'fas fa-bullseye', label: 'KPI' },
-    { path: '/tasks', icon: 'fas fa-tasks', label: 'Công việc' },
-    { path: '/approvals', icon: 'fas fa-stamp', label: 'Đề xuất' },
-    { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công' }
+    { path: '/dashboard', icon: 'fa-house', label: 'Tổng quan' },
+    { path: '/employees', icon: 'fa-id-card', label: 'Hồ sơ nhân sự' },
+    { path: '/recruitment', icon: 'fa-user-plus', label: 'Tuyển dụng' },
+    { path: '/salary', icon: 'fa-wallet', label: 'Lương & Phúc lợi' },
+    { path: '/competency', icon: 'fa-diagram-project', label: 'Khung năng lực' },
+    { path: '/kpi', icon: 'fa-chart-pie', label: 'KPI' },
+    { path: '/tasks', icon: 'fa-list-check', label: 'Công việc' },
+    { path: '/approvals', icon: 'fa-file-signature', label: 'Đề xuất' },
+    { path: '/attendance', icon: 'fa-business-time', label: 'Chấm công' }
   ]
 
   return (
     <aside className="sidebar">
       <div className="brand">
-        <i className="fas fa-layer-group"></i>
+        <span className="brand__icon" aria-hidden="true">
+          <i className="fa-solid fa-briefcase"></i>
+        </span>
         <span>HR Manager</span>
       </div>
 
-      {menuItems.map(item => (
-        <Link
-          key={item.path}
-          to={item.path}
-          className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
-          aria-current={location.pathname === item.path ? 'page' : undefined}
-        >
-          <i className={item.icon}></i>
-          <span>{item.label}</span>
-        </Link>
-      ))}
+      <nav className="sidebar__nav" aria-label="Menu chính">
+        {menuItems.map(item => {
+          const active = location.pathname === item.path || location.pathname.startsWith(`${item.path}/`)
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`nav-item ${active ? 'active' : ''}`}
+              aria-current={active ? 'page' : undefined}
+            >
+              <span className="nav-item__icon" aria-hidden="true">
+                <i className={`fa-solid ${item.icon}`}></i>
+              </span>
+              <span className="nav-item__label">{item.label}</span>
+            </Link>
+          )
+        })}
+      </nav>
     </aside>
   )
 }

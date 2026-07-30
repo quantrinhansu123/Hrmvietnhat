@@ -632,12 +632,16 @@ function Salary() {
   }
 
   return (
-    <div>
-      <div className="page-header">
-        <h1 className="page-title">
-          <i className="fas fa-dollar-sign"></i>
-          Bậc lương & Thăng tiến
-        </h1>
+    <div className="salary-directory">
+      <div className="page-header salary-directory__header">
+        <div className="salary-directory__heading">
+          <span className="salary-directory__heading-icon"><i className="fas fa-chart-line"></i></span>
+          <div>
+            <h1 className="page-title">Bậc lương & Thăng tiến</h1>
+            <p>Thiết lập khung lương, phân bậc và theo dõi lộ trình nhân sự</p>
+          </div>
+        </div>
+        <div className="salary-directory__header-actions">
         {activeTab === 'grades' && (
           <>
             <button
@@ -809,36 +813,43 @@ function Salary() {
             </button>
           </>
         )}
-
+        </div>
       </div>
 
-      <div className="tabs">
+      <div className="tabs salary-directory__tabs">
         <div
           className={`tab ${activeTab === 'grades' ? 'active' : ''}`}
           onClick={() => setActiveTab('grades')}
         >
-          📊 Danh mục bậc lương
+          <span className="salary-tab-icon"><i className="far fa-rectangle-list"></i></span>
+          Danh mục bậc lương
         </div>
         <div
           className={`tab ${activeTab === 'employee-salary' ? 'active' : ''}`}
           onClick={() => setActiveTab('employee-salary')}
         >
-          👤 Bậc lương NV
+          <span className="salary-tab-icon"><i className="fas fa-user-tag"></i></span>
+          Bậc lương nhân viên
         </div>
         <div
           className={`tab ${activeTab === 'promotions' ? 'active' : ''}`}
           onClick={() => setActiveTab('promotions')}
         >
-          📈 Lịch sử thăng tiến
+          <span className="salary-tab-icon"><i className="fas fa-clock-rotate-left"></i></span>
+          Lịch sử thăng tiến
         </div>
 
       </div>
 
       {/* Tab 1: Danh mục bậc lương */}
       {activeTab === 'grades' && (
-        <div className="card">
-          <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)', border: '1px solid #e0e0e0' }}>
-            <table style={{ minWidth: '101%', marginBottom: 0 }}>
+        <div className="card salary-table-card">
+          <div className="salary-table-card__caption">
+            <div><strong>Danh mục bậc lương</strong><span>{salaryGrades.length} bậc lương đang được thiết lập</span></div>
+            <span className="salary-table-card__meta"><i className="fas fa-circle-info"></i> Cập nhật theo chính sách hiện hành</span>
+          </div>
+          <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)' }}>
+            <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
               <thead>
                 <tr>
                   <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
@@ -863,7 +874,7 @@ function Salary() {
                         <td>{grade.shift || 'Ca ngày'}</td>
                         <td>{grade.revenueFrom || 0}</td>
                         <td>{grade.revenueTo === null || grade.revenueTo === undefined || grade.revenueTo === '' ? 'Không giới hạn' : grade.revenueTo}</td>
-                        <td>Bậc {grade.level || 1}</td>
+                        <td><span className="salary-level-chip">Bậc {grade.level || 1}</span></td>
                         <td style={{ fontWeight: 700, color: 'var(--primary)' }}>
                           {formatMoney(grade.salary || 0)}
                         </td>
@@ -873,7 +884,9 @@ function Salary() {
                           </span>
                         </td>
                         <td>
-                          <div className="actions">
+                          <details className="salary-action-menu">
+                            <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                            <div className="salary-action-menu__dropdown">
                             <button
                               className="view"
                               onClick={() => {
@@ -882,7 +895,7 @@ function Salary() {
                                 setIsGradeModalOpen(true)
                               }}
                             >
-                              <i className="fas fa-eye"></i>
+                              <i className="far fa-eye"></i><span>Xem chi tiết</span>
                             </button>
                             <button
                               className="edit"
@@ -892,15 +905,16 @@ function Salary() {
                                 setIsGradeModalOpen(true)
                               }}
                             >
-                              <i className="fas fa-pencil-alt"></i>
+                              <i className="far fa-pen-to-square"></i><span>Chỉnh sửa</span>
                             </button>
                             <button
                               className="delete"
                               onClick={() => handleDeleteGrade(grade.id)}
                             >
-                              <i className="fas fa-trash"></i>
+                              <i className="far fa-trash-can"></i><span>Xóa</span>
                             </button>
-                          </div>
+                            </div>
+                          </details>
                         </td>
                       </tr>
                     ))
@@ -919,9 +933,9 @@ function Salary() {
       {/* Tab 2: Bậc lương nhân viên */}
       {
         activeTab === 'employee-salary' && (
-          <div className="card">
-            <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)', border: '1px solid #e0e0e0' }}>
-              <table style={{ minWidth: '101%', marginBottom: 0 }}>
+          <div className="card salary-table-card">
+            <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)' }}>
+              <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                 <thead>
                   <tr>
                     <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
@@ -955,7 +969,9 @@ function Salary() {
                           </td>
                           <td>{empSal.effectiveDate || '-'}</td>
                           <td>
-                            <div className="actions">
+                            <details className="salary-action-menu">
+                              <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                              <div className="salary-action-menu__dropdown">
                               <button
                                 className="view"
                                 onClick={() => {
@@ -964,7 +980,7 @@ function Salary() {
                                   setIsEmployeeSalaryModalOpen(true)
                                 }}
                               >
-                                <i className="fas fa-eye"></i>
+                                <i className="far fa-eye"></i><span>Xem chi tiết</span>
                               </button>
                               <button
                                 className="edit"
@@ -974,15 +990,16 @@ function Salary() {
                                   setIsEmployeeSalaryModalOpen(true)
                                 }}
                               >
-                                <i className="fas fa-edit"></i>
+                                <i className="far fa-pen-to-square"></i><span>Chỉnh sửa</span>
                               </button>
                               <button
                                 className="delete"
                                 onClick={() => handleDeleteEmployeeSalary(empSal.id)}
                               >
-                                <i className="fas fa-trash"></i>
+                                <i className="far fa-trash-can"></i><span>Xóa</span>
                               </button>
-                            </div>
+                              </div>
+                            </details>
                           </td>
                         </tr>
                       )
@@ -1002,9 +1019,9 @@ function Salary() {
       {/* Tab 3: Lịch sử thăng tiến */}
       {
         activeTab === 'promotions' && (
-          <div className="card">
-            <div style={{ overflowX: 'scroll', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)', border: '1px solid #e0e0e0' }}>
-              <table style={{ minWidth: '101%', marginBottom: 0 }}>
+          <div className="card salary-table-card">
+            <div className="salary-table-scroll" style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 'calc(100vh - 350px)' }}>
+              <table className="salary-data-table" style={{ minWidth: '101%', marginBottom: 0 }}>
                 <thead>
                   <tr>
                     <th style={{ minWidth: '50px', position: 'sticky', top: 0, background: '#f8f9fa', zIndex: 10 }}>STT</th>
@@ -1048,7 +1065,9 @@ function Salary() {
                             <td>{history.type || history.hinhThuc || '-'}</td>
                             <td>{history.reason || history.lyDo || '-'}</td>
                             <td>
-                              <div className="actions">
+                              <details className="salary-action-menu">
+                                <summary title="Thao tác"><i className="fas fa-ellipsis-vertical"></i></summary>
+                                <div className="salary-action-menu__dropdown">
                                 <button
                                   className="view"
                                   onClick={() => {
@@ -1056,7 +1075,7 @@ function Salary() {
                                     setIsHistoryModalOpen(true)
                                   }}
                                 >
-                                  <i className="fas fa-eye"></i>
+                                  <i className="far fa-eye"></i><span>Xem chi tiết</span>
                                 </button>
                                 <button
                                   className="edit"
@@ -1065,15 +1084,16 @@ function Salary() {
                                     setIsPromotionModalOpen(true)
                                   }}
                                 >
-                                  <i className="fas fa-pencil-alt"></i>
+                                  <i className="far fa-pen-to-square"></i><span>Chỉnh sửa</span>
                                 </button>
                                 <button
                                   className="delete"
                                   onClick={() => handleDeletePromotionHistory(history.id)}
                                 >
-                                  <i className="fas fa-trash"></i>
+                                  <i className="far fa-trash-can"></i><span>Xóa</span>
                                 </button>
-                              </div>
+                                </div>
+                              </details>
                             </td>
                           </tr>
                         )

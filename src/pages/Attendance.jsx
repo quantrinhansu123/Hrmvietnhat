@@ -961,42 +961,48 @@ function Attendance() {
         )}
       </div>
 
-      <div className="tabs">
+      <div className="tabs attendance-tabs">
         <div
           className={`tab ${activeTab === 'attendance' ? 'active' : ''}`}
           onClick={() => setActiveTab('attendance')}
         >
-          ⏰ Chấm công
+          <span className="attendance-tab-icon"><i className="far fa-calendar-check"></i></span>
+          Chấm công
         </div>
         <div
           className={`tab ${activeTab === 'workday_summary' ? 'active' : ''}`}
           onClick={() => setActiveTab('workday_summary')}
         >
-          📈 Tổng hợp công
+          <span className="attendance-tab-icon"><i className="fas fa-chart-line"></i></span>
+          Tổng hợp công
         </div>
         <div
           className={`tab ${activeTab === 'payroll' ? 'active' : ''}`}
           onClick={() => setActiveTab('payroll')}
         >
-          💰 Tính lương
+          <span className="attendance-tab-icon"><i className="fas fa-money-check-dollar"></i></span>
+          Tính lương
         </div>
         <div
           className={`tab ${activeTab === 'insurance' ? 'active' : ''}`}
           onClick={() => setActiveTab('insurance')}
         >
-          🏥 BHXH
+          <span className="attendance-tab-icon"><i className="fas fa-shield-heart"></i></span>
+          BHXH
         </div>
         <div
           className={`tab ${activeTab === 'tax' ? 'active' : ''}`}
           onClick={() => setActiveTab('tax')}
         >
-          📊 Thuế TNCN
+          <span className="attendance-tab-icon"><i className="fas fa-file-invoice-dollar"></i></span>
+          Thuế TNCN
         </div>
         <div
           className={`tab ${activeTab === 'dependents' ? 'active' : ''}`}
           onClick={() => setActiveTab('dependents')}
         >
-          👨‍👩‍👧 Người phụ thuộc
+          <span className="attendance-tab-icon"><i className="fas fa-people-roof"></i></span>
+          Người phụ thuộc
         </div>
       </div>
 

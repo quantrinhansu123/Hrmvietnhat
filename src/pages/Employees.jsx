@@ -3,13 +3,14 @@ import * as XLSX from 'xlsx'
 import EmployeeModal from '../components/EmployeeModal'
 import StatusHistoryView from '../components/StatusHistoryView'
 import EmployeeDirectory from '../components/EmployeeDirectory'
-import { supabase } from '../services/supabase'
-import { formatDateDisplay, mapAppToUser, mapUserToApp, runUsersMutationWithSchemaFallback } from '../utils/helpers'
+import { isSupabaseConfigured, supabase } from '../services/supabase'
+import { formatDateDisplay, mapAppToNhanSu, mapNhanSuToApp, runUsersMutationWithSchemaFallback } from '../utils/helpers'
 
 function Employees() {
     const [employees, setEmployees] = useState([])
     const [filteredEmployees, setFilteredEmployees] = useState([])
     const [loading, setLoading] = useState(true)
+    const [loadError, setLoadError] = useState('')
     const [searchTerm, setSearchTerm] = useState('')
     const [filterBranch, setFilterBranch] = useState('')
     const [filterDept, setFilterDept] = useState('')
@@ -36,18 +37,25 @@ function Employees() {
     const loadEmployees = async () => {
         try {
             setLoading(true)
+            setLoadError('')
+
+            if (!isSupabaseConfigured) {
+                throw new Error('Chưa cấu hình kết nối Supabase (.env). Kiểm tra VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY rồi chạy lại npm run dev.')
+            }
+
             const { data, error } = await supabase
-                .from('users')
+                .from('nhan_su')
                 .select('*')
 
             if (error) throw error
 
-            const mappedData = (data || []).map(u => mapUserToApp(u))
+            const mappedData = (data || []).map(u => mapNhanSuToApp(u)).filter(Boolean)
             setEmployees(mappedData)
             setLoading(false)
         } catch (err) {
             console.error("Error loading employees:", err)
             setEmployees([])
+            setLoadError(err?.message || 'Chưa kết nối đúng database. Vui lòng thử lại.')
             setLoading(false)
         }
     }
@@ -128,9 +136,9 @@ function Employees() {
 
         try {
             const { error } = await supabase
-                .from('users')
+                .from('nhan_su')
                 .delete()
-                .eq('id', id)
+                .eq('ma_nhan_su', id)
 
             if (error) throw error
 
@@ -413,12 +421,20 @@ function Employees() {
 
                 console.log('✅ Importing:', payload.ho_va_ten)
 
-                const dbPayload = mapAppToUser(payload)
-                dbPayload.id = crypto.randomUUID()
-                dbPayload.password = payload.password || dbPayload.password || '123456'
+                const dbPayload = mapAppToNhanSu(payload)
+                if (!dbPayload.ma_nhan_su) {
+                    errors.push({
+                        row: rowIndex,
+                        name: payload.ho_va_ten || 'Không tên',
+                        reason: 'Thiếu mã nhân sự (ma_nhan_su)'
+                    })
+                    skipped++
+                    continue
+                }
+                dbPayload.mat_khau = payload.password || dbPayload.mat_khau || '123456'
 
                 const mutationResult = await runUsersMutationWithSchemaFallback(
-                    (payloadToInsert) => supabase.from('users').insert([payloadToInsert]),
+                    (payloadToInsert) => supabase.from('nhan_su').upsert([payloadToInsert], { onConflict: 'ma_nhan_su' }),
                     dbPayload
                 )
                 const { error } = mutationResult
@@ -650,6 +666,30 @@ function Employees() {
         return <div className="loadingState">Đang tải dữ liệu...</div>
     }
 
+    if (loadError) {
+        return (
+            <div className="employees-page" style={{ padding: '48px 24px', textAlign: 'center' }}>
+                <div style={{
+                    maxWidth: 480,
+                    margin: '0 auto',
+                    padding: '28px 24px',
+                    border: '1px solid #fecdd3',
+                    borderRadius: 12,
+                    background: '#fff8f9'
+                }}>
+                    <i className="fas fa-database" style={{ fontSize: 28, color: '#e11d48', marginBottom: 12 }}></i>
+                    <h3 style={{ margin: '0 0 8px', color: '#101828' }}>Chưa kết nối đúng database</h3>
+                    <p style={{ margin: '0 0 18px', color: '#667085', fontSize: '0.9rem', lineHeight: 1.5 }}>
+                        {loadError}
+                    </p>
+                    <button className="btn btn-primary" onClick={loadEmployees}>
+                        <i className="fas fa-rotate-right"></i> Thử lại
+                    </button>
+                </div>
+            </div>
+        )
+    }
+
     return <EmployeeDirectory
         employees={employees}
         filteredEmployees={filteredEmployees}
@@ -657,6 +697,8 @@ function Employees() {
         setActiveTab={setActiveTab}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+        filterBranch={filterBranch}
+        setFilterBranch={setFilterBranch}
         filterDept={filterDept}
         setFilterDept={setFilterDept}
         filterStatus={filterStatus}
@@ -672,6 +714,7 @@ function Employees() {
         onReload={loadEmployees}
         onExport={exportToExcel}
         onImport={handleImportExcel}
+        onDelete={handleDelete}
     />
 
     /*

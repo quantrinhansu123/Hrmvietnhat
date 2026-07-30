@@ -1491,30 +1491,35 @@ function Approvals() {
                 className={tab === 'inbox' ? 'active' : ''}
                 onClick={() => setTabNav('inbox')}
               >
+                <span className="apv-tab-icon"><i className="fas fa-inbox"></i></span>
                 Gửi đến
               </button>
               <button
                 className={tab === 'sent' ? 'active' : ''}
                 onClick={() => setTabNav('sent')}
               >
+                <span className="apv-tab-icon"><i className="far fa-paper-plane"></i></span>
                 Gửi đi
               </button>
               <button
                 className={tab === 'admin' ? 'active' : ''}
                 onClick={() => setTabNav('admin')}
               >
+                <span className="apv-tab-icon"><i className="fas fa-user-shield"></i></span>
                 Quản trị
               </button>
               <button
                 className={tab === 'templates' ? 'active' : ''}
                 onClick={() => setTabNav('templates')}
               >
+                <span className="apv-tab-icon"><i className="far fa-rectangle-list"></i></span>
                 Mẫu yêu cầu
               </button>
               <button
                 className={tab === 'stats' ? 'active' : ''}
                 onClick={() => setTabNav('stats')}
               >
+                <span className="apv-tab-icon"><i className="fas fa-chart-column"></i></span>
                 Thống kê
               </button>
             </div>
