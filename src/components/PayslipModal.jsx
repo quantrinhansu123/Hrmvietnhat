@@ -121,7 +121,7 @@ function PayslipModal({ payroll, employee, isOpen, onClose }) {
           </div>
 
           {/* 4. Thực lĩnh */}
-          <div style={{ padding: '20px', background: '#f0f8ff', borderRadius: '4px', textAlign: 'center' }}>
+          <div style={{ padding: '20px', background: 'var(--primary-soft)', borderRadius: '4px', textAlign: 'center' }}>
             <h4 style={{ marginBottom: '10px' }}>4. Thực lĩnh</h4>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: 'var(--success)' }}>
               {formatMoney(netSalary)}

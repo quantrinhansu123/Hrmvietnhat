@@ -235,7 +235,7 @@ function PayrollDetailModal({ payroll, employees, isOpen, onClose, onSave, readO
               </div>
             </div>
 
-            <div style={{ marginTop: '20px', padding: '15px', background: '#f0f8ff', borderRadius: '4px' }}>
+            <div style={{ marginTop: '20px', padding: '15px', background: 'var(--primary-soft)', borderRadius: '4px' }}>
               <h4>Khấu trừ</h4>
               <div className="form-row">
                 <div className="form-group">

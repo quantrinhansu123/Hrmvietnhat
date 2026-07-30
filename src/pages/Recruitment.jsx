@@ -635,7 +635,7 @@ function Recruitment() {
               className="btn btn-info"
               onClick={downloadPlanTemplate}
               title="Tải file mẫu Excel"
-              style={{ background: '#17a2b8', borderColor: '#17a2b8', color: '#fff' }}
+              style={{ background: 'var(--primary)', borderColor: 'var(--primary)', color: '#fff' }}
             >
               <i className="fas fa-download"></i>
               Tải file mẫu
@@ -764,7 +764,7 @@ function Recruitment() {
               className="btn btn-info"
               onClick={downloadCandidateTemplate}
               title="Tải file mẫu Excel"
-              style={{ background: '#17a2b8', borderColor: '#17a2b8', color: '#fff' }}
+              style={{ background: 'var(--primary)', borderColor: 'var(--primary)', color: '#fff' }}
             >
               <i className="fas fa-download"></i>
               Tải file mẫu
@@ -933,7 +933,7 @@ function Recruitment() {
                 />
               </div>
 
-              <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px', fontSize: '0.9rem' }}>
+              <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px', fontSize: '0.9rem' }}>
                 <strong>Lưu ý:</strong>
                 <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                   <li>File Excel cần có các cột bắt buộc: <b>Họ và tên, Vị trí ứng tuyển, Email</b></li>
@@ -1035,7 +1035,7 @@ function Recruitment() {
                 />
               </div>
 
-              <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px', fontSize: '0.9rem' }}>
+              <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px', fontSize: '0.9rem' }}>
                 <strong>Lưu ý:</strong>
                 <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                   <li>File Excel cần có các cột bắt buộc: <b>Bộ phận, Vị trí, Định biên</b></li>

@@ -1546,7 +1546,7 @@ function KPI() {
                   <label>Chọn file Excel</label>
                   <input type="file" accept=".xlsx,.xls" onChange={handleTemplateFileSelect} style={{ width: '100%', padding: '10px' }} />
                 </div>
-                <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px', fontSize: '0.9rem' }}>
+                <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px', fontSize: '0.9rem' }}>
                   <strong>Lưu ý:</strong>
                   <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                     <li>File Excel cần có các cột bắt buộc: <b>Mã KPI, Tên KPI</b></li>
@@ -1607,7 +1607,7 @@ function KPI() {
                   <label>Chọn file Excel</label>
                   <input type="file" accept=".xlsx,.xls" onChange={handleEmployeeKPIFileSelect} style={{ width: '100%', padding: '10px' }} />
                 </div>
-                <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px', fontSize: '0.9rem' }}>
+                <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px', fontSize: '0.9rem' }}>
                   <strong>Lưu ý:</strong>
                   <ul style={{ marginTop: '5px', paddingLeft: '20px' }}>
                     <li>File Excel cần có cột bắt buộc: <b>Mã NV</b></li>

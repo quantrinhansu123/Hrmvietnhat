@@ -711,8 +711,8 @@ function Employees() {
                             style={{
                                 marginRight: '10px',
                                 color: '#fff',
-                                background: '#17a2b8',
-                                borderColor: '#17a2b8'
+                                background: 'var(--primary)',
+                                borderColor: 'var(--primary)'
                             }}
                         >
                             <i className="fas fa-download"></i>

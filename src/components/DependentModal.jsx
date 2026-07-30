@@ -274,7 +274,7 @@ function DependentModal({ dependent, employees, isOpen, onClose, onSave, readOnl
               </select>
             </div>
 
-            <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px', fontSize: '0.9rem' }}>
+            <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px', fontSize: '0.9rem' }}>
               <strong>Lưu ý:</strong> Mỗi người phụ thuộc được giảm trừ 6.200.000 VNĐ/tháng trong tính thuế TNCN.
             </div>
 

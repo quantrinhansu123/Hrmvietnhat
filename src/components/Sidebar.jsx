@@ -27,6 +27,7 @@ function Sidebar() {
           key={item.path}
           to={item.path}
           className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
+          aria-current={location.pathname === item.path ? 'page' : undefined}
         >
           <i className={item.icon}></i>
           <span>{item.label}</span>

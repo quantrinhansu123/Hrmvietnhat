@@ -371,7 +371,7 @@ function CandidateModal({ candidate, isOpen, onClose, onSave, readOnly = false, 
                         <i className={`fas ${file.type?.includes('pdf') ? 'fa-file-pdf' :
                           file.type?.includes('word') || file.type?.includes('document') ? 'fa-file-word' :
                             'fa-file'
-                          }`} style={{ color: file.type?.includes('pdf') ? '#d32f2f' : '#2196f3' }}></i>
+                          }`} style={{ color: file.type?.includes('pdf') ? '#d32f2f' : 'var(--primary)' }}></i>
                         <span style={{ flex: 1 }}>{file.name || `File ${idx + 1}`}</span>
                       </div>
 

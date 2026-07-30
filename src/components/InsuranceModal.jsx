@@ -303,7 +303,7 @@ function InsuranceModal({ insurance, employees, employeeSalaries, salaryGrades, 
               </div>
             </div>
 
-            <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px' }}>
+            <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px' }}>
               <strong>Mức đóng BHXH hàng tháng:</strong>
               <div style={{ marginTop: '5px' }}>
                 NLĐ: {formatMoney((formData.mucLuongDong * formData.tyLeNLD) / 100)}

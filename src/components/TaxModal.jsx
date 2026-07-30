@@ -328,7 +328,7 @@ function TaxModal({ tax, employees, dependents, insuranceList, isOpen, onClose, 
             </div>
 
             {tax && employeeDependents.length > 0 && (
-              <div style={{ marginTop: '15px', padding: '10px', background: '#f0f8ff', borderRadius: '4px' }}>
+              <div style={{ marginTop: '15px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px' }}>
                 <strong>Người phụ thuộc: {employeeDependents.length} người</strong>
                 <div style={{ marginTop: '5px', fontSize: '0.9rem' }}>
                   Tổng giảm trừ: {formatMoney(totalDependentDeduction)}

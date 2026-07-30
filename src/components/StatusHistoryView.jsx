@@ -91,8 +91,8 @@ function StatusHistoryView({ employees, onDataChange }) {
                         style={{
                             padding: '8px 16px',
                             border: 'none',
-                            background: activeTab === 'detail' ? '#e3f2fd' : 'transparent',
-                            color: activeTab === 'detail' ? '#0d47a1' : '#666',
+                            background: activeTab === 'detail' ? 'var(--primary-soft)' : 'transparent',
+                            color: activeTab === 'detail' ? 'var(--primary-dark)' : '#666',
                             borderRadius: '6px',
                             fontWeight: activeTab === 'detail' ? '600' : '500',
                             cursor: 'pointer',
@@ -111,8 +111,8 @@ function StatusHistoryView({ employees, onDataChange }) {
                         style={{
                             padding: '8px 16px',
                             border: 'none',
-                            background: activeTab === 'summary' ? '#e3f2fd' : 'transparent',
-                            color: activeTab === 'summary' ? '#0d47a1' : '#666',
+                            background: activeTab === 'summary' ? 'var(--primary-soft)' : 'transparent',
+                            color: activeTab === 'summary' ? 'var(--primary-dark)' : '#666',
                             borderRadius: '6px',
                             fontWeight: activeTab === 'summary' ? '600' : '500',
                             cursor: 'pointer',
@@ -159,8 +159,8 @@ function StatusHistoryView({ employees, onDataChange }) {
                 {/* Summary Table */}
                 {activeTab === 'summary' && (
                     <div className="card" style={{ padding: '0', overflow: 'hidden', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>
-                        <div style={{ padding: '15px', borderBottom: '1px solid #eee', background: 'linear-gradient(to right, #e3f2fd, #bbdefb)' }}>
-                            <h4 style={{ margin: 0, fontSize: '1.1rem', color: '#0d47a1' }}>
+                        <div style={{ padding: '15px', borderBottom: '1px solid #eee', background: 'linear-gradient(to right, var(--primary-softer), var(--primary-soft))' }}>
+                            <h4 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--primary-dark)' }}>
                                 <i className="fas fa-chart-pie" style={{ marginRight: '8px' }}></i>
                                 Thống kê biến động nhân sự {fromDate ? `từ ${fromDate}` : ''} {toDate ? `đến ${toDate}` : ''}
                             </h4>
@@ -175,7 +175,7 @@ function StatusHistoryView({ employees, onDataChange }) {
                             <tbody>
                                 <tr>
                                     <td>Tổng nhân viên Thử việc</td>
-                                    <td style={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2', fontSize: '1.2rem' }}>{summaryStats.thuViec}</td>
+                                    <td style={{ textAlign: 'center', fontWeight: 'bold', color: 'var(--primary)', fontSize: '1.2rem' }}>{summaryStats.thuViec}</td>
                                 </tr>
                                 <tr>
                                     <td>Tổng nhân viên Chính thức</td>

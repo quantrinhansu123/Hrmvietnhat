@@ -14,7 +14,7 @@ const LoadingSpinner = () => {
                 width: '36px',
                 height: '36px',
                 borderRadius: '50%',
-                borderLeftColor: '#09f',
+                borderLeftColor: 'var(--primary)',
                 animation: 'spin 1s ease infinite'
             }}></div>
             <style>

@@ -609,7 +609,7 @@ function AttendanceImportModal({ employees, isOpen, onClose, onSave }) {
                 {previewData.isMatrixMode && (
                   <li>
                     <strong>Các cột ngày tìm thấy:</strong>{' '}
-                    <span style={{ color: '#007bff', fontWeight: 'bold' }}>
+                    <span style={{ color: 'var(--primary)', fontWeight: 'bold' }}>
                       {previewData.detectedDays.join(', ')}
                     </span>
                   </li>

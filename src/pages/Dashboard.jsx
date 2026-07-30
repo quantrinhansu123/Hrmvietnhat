@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom'
 import './Dashboard.css'
 
 const menuItems = [
-  { path: '/employees', icon: 'fas fa-users', label: 'Hồ sơ nhân sự', color: '#e11d48' },
-  { path: '/recruitment', icon: 'fas fa-user-plus', label: 'Tuyển dụng', color: '#f97316' },
-  { path: '/salary', icon: 'fas fa-money-bill-wave', label: 'Lương & Phúc lợi', color: '#16a34a' },
-  { path: '/competency', icon: 'fas fa-chart-line', label: 'Khung năng lực', color: '#0891b2' },
-  { path: '/kpi', icon: 'fas fa-bullseye', label: 'KPI', color: '#7c3aed' },
-  { path: '/tasks', icon: 'fas fa-tasks', label: 'Công việc', color: '#2563eb' },
-  { path: '/approvals', icon: 'fas fa-stamp', label: 'Đề xuất', color: '#db2777' },
-  { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công', color: '#0f766e' }
+  { path: '/employees', icon: 'fas fa-users', label: 'Hồ sơ nhân sự', color: 'var(--primary)' },
+  { path: '/recruitment', icon: 'fas fa-user-plus', label: 'Tuyển dụng', color: 'var(--primary-700)' },
+  { path: '/salary', icon: 'fas fa-money-bill-wave', label: 'Lương & Phúc lợi', color: 'var(--primary-500)' },
+  { path: '/competency', icon: 'fas fa-chart-line', label: 'Khung năng lực', color: 'var(--primary-800)' },
+  { path: '/kpi', icon: 'fas fa-bullseye', label: 'KPI', color: 'var(--primary-600)' },
+  { path: '/tasks', icon: 'fas fa-tasks', label: 'Công việc', color: 'var(--primary-900)' },
+  { path: '/approvals', icon: 'fas fa-stamp', label: 'Đề xuất', color: 'var(--primary-400)' },
+  { path: '/attendance', icon: 'fas fa-clock', label: 'Chấm công', color: 'var(--primary-700)' }
 ]
 
 function Dashboard() {

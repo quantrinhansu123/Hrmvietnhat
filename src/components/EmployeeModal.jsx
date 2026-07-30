@@ -944,7 +944,7 @@ function EmployeeModal({
                         {getFilledDocuments().map((file, idx) => (
                           <div key={idx} className="document-item">
                             <div className="document-item-info">
-                              <i className={`fas ${getFileIcon(file)}`} style={{ color: '#2563eb' }}></i>
+                              <i className={`fas ${getFileIcon(file)}`} style={{ color: 'var(--primary)' }}></i>
                               <div style={{ minWidth: 0 }}>
                                 <span style={{ display: 'block', fontWeight: 600 }}>{file.name || `Giấy tờ ${idx + 1}`}</span>
                                 {(file.url || (file.attachments || []).length > 0) && (

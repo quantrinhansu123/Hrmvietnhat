@@ -412,7 +412,7 @@ function GradingPage() {
                         ))}
 
                         {/* SECTION C */}
-                        <tr style={{ background: '#cce5ff' }}>
+                        <tr style={{ background: 'var(--primary-soft)' }}>
                             <td style={{ fontWeight: 'bold' }}>C. KHUNG ĐIỂM CỘNG</td>
                             <td style={{ textAlign: 'center', fontWeight: 'bold' }}>15</td>
                             <td style={{ textAlign: 'center', fontWeight: 'bold', color: 'blue' }}>{selfTotals.scoreC}</td>

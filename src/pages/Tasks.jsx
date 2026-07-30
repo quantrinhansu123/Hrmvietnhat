@@ -581,7 +581,7 @@ function Tasks() {
                   <label>Chọn file Excel</label>
                   <input type="file" accept=".xlsx,.xls" onChange={handleFileSelect} />
                 </div>
-                <div style={{ marginTop: '10px', padding: '10px', background: '#e7f3ff', borderRadius: '4px', fontSize: '0.9rem' }}>
+                <div style={{ marginTop: '10px', padding: '10px', background: 'var(--primary-soft)', borderRadius: '4px', fontSize: '0.9rem' }}>
                   <strong>Lưu ý:</strong> Cần các cột: Tên công việc, Bộ phận, Người giao (Họ tên), Người nhận (Họ tên), Deadline.
                 </div>
 

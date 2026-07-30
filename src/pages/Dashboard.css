@@ -7,8 +7,9 @@
   overflow: hidden;
   padding: 18px 0 28px;
   background:
-    radial-gradient(circle at 50% 48%, rgba(225, 29, 72, 0.08), transparent 34%),
-    linear-gradient(180deg, #fff 0%, #fff7f8 100%);
+    radial-gradient(circle at 50% 48%, rgba(216, 12, 36, 0.09), transparent 35%),
+    linear-gradient(180deg, #fff 0%, var(--primary-softer) 100%);
+  border: 1px solid var(--border);
   border-radius: 18px;
 }
 
@@ -232,7 +233,7 @@
   }
 
   .orbit-stage {
-    --orbit-size: min(92vw, 430px);
+    --orbit-size: min(calc(100vw - 72px), 430px);
     --orbit-radius: calc(var(--orbit-size) * 0.38);
     margin-top: 20px;
   }

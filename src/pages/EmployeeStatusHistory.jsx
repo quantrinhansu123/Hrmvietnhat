@@ -129,8 +129,8 @@ function EmployeeStatusHistory() {
         {/* Summary Table */}
         {activeTab === 'summary' && (
           <div className="card" style={{ padding: '0', overflow: 'hidden' }}>
-            <div style={{ padding: '15px', borderBottom: '1px solid #eee', background: '#e3f2fd' }}>
-              <h4 style={{ margin: 0, fontSize: '1.1rem', color: '#0d47a1' }}>
+            <div style={{ padding: '15px', borderBottom: '1px solid #eee', background: 'var(--primary-soft)' }}>
+              <h4 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--primary-dark)' }}>
                 <i className="fas fa-chart-pie" style={{ marginRight: '8px' }}></i>
                 Bảng tổng hợp số liệu
               </h4>
@@ -145,7 +145,7 @@ function EmployeeStatusHistory() {
               <tbody>
                 <tr>
                   <td>Tổng nhân viên Thử việc</td>
-                  <td style={{ textAlign: 'center', fontWeight: 'bold', color: '#1976d2', fontSize: '1.2rem' }}>{summaryStats.thuViec}</td>
+                  <td style={{ textAlign: 'center', fontWeight: 'bold', color: 'var(--primary)', fontSize: '1.2rem' }}>{summaryStats.thuViec}</td>
                 </tr>
                 <tr>
                   <td>Tổng nhân viên Chính thức</td>
