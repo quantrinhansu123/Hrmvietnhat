@@ -49,7 +49,7 @@ Kết quả mong đợi:
 
 | Bước | Đường dẫn | Thao tác | Kết quả mong đợi |
 | --- | --- | --- | --- |
-| 1 | `/dashboard` | Quan sát vòng menu trong ít nhất 30 giây, sau đó chọn một chức năng | 8 chức năng dùng các sắc đỏ; vòng menu đứng yên hoàn toàn; không cắt nội dung |
+| 1 | `/dashboard` | Quan sát vòng menu trong ít nhất 30 giây, sau đó chọn một chức năng | 8 card/icon lớn dùng các sắc đỏ, tận dụng gần trọn vùng nội dung; vòng menu đứng yên hoàn toàn; không cắt nội dung |
 | 2 | `/employees` | Dùng bộ lọc, chuyển tab, mở form thêm/sửa | Card, tab, nút và focus input theo theme đỏ; modal hiển thị đầy đủ |
 | 3 | `/recruitment` | Chuyển các tab và mở form tuyển dụng | Nút chính màu đỏ; vùng thông tin dùng nền đỏ nhạt |
 | 4 | `/salary` | Chuyển các bảng lương, mở chi tiết | Header bảng trung tính; nút thao tác chính màu đỏ; trạng thái vẫn dễ phân biệt |
